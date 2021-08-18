@@ -21,3 +21,7 @@ Route::get('/tabs', function () {
 Route::get('/buttons', function () {
     return view('content.uiElements.buttons');
 })->name('buttons');
+
+Route::get('/panels', function () {
+    return view('content.uiElements.panels');
+})->name('panels');
