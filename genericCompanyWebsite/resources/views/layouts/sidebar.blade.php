@@ -10,7 +10,7 @@
                     class="caret"></span></a>
             <ul>
                 <li><a href="{{url('/icons')}}">Icons</a></li>
-                <li><a href="tabs.html">Tabs</a></li>
+                <li><a href="{{url('/tabs')}}">Tabs</a></li>
                 <li><a href="buttons.html">Buttons</a></li>
                 <li><a href="panels.html">Panels</a></li>
                 <li><a href="notifications.html">Notifications</a></li>

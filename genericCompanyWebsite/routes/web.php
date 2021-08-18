@@ -13,3 +13,7 @@ Route::get('/mailbox', function () {
 Route::get('/icons', function () {
     return view('content.uiElements.icons');
 })->name('icons');
+
+Route::get('/tabs', function () {
+    return view('content.uiElements.tabs');
+})->name('tabs');
