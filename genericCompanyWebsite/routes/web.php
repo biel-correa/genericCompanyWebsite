@@ -17,3 +17,7 @@ Route::get('/icons', function () {
 Route::get('/tabs', function () {
     return view('content.uiElements.tabs');
 })->name('tabs');
+
+Route::get('/buttons', function () {
+    return view('content.uiElements.buttons');
+})->name('buttons');
