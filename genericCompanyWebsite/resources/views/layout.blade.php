@@ -104,7 +104,7 @@
         <li><a href="#"><span class="icon color7"><i class="fa fa-flask"></i></span>UI Elements<span
               class="caret"></span></a>
           <ul>
-            <li><a href="icons.html">Icons</a></li>
+            <li><a href="{{url('/icons')}}">Icons</a></li>
             <li><a href="tabs.html">Tabs</a></li>
             <li><a href="buttons.html">Buttons</a></li>
             <li><a href="panels.html">Panels</a></li>

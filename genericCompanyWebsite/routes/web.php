@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/mailbox', function () {
     return view('content.mailbox');
 })->name('mailbox');
+
+Route::get('/icons', function () {
+    return view('content.uiElements.icons');
+})->name('icons');
