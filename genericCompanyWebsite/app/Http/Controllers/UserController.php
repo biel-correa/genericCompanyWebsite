@@ -26,4 +26,11 @@ class UserController extends Controller
         ->get();
         return view('content.users', ['users'=>$users]);
     }
+
+    public function deleteUserById(int $id){
+        DB::table('users')
+        ->where('id', $id)
+        ->delete();
+        return redirect()->route('users');
+    }
 }

@@ -55,6 +55,7 @@
                     <td>Name</td>
                     <td>E-mail</td>
                     <td>Creation Date</td>
+                    <td>Acitions</td>
                 </thead>
                 <tbody>
                     {{-- for aqui nos tr td --}}
@@ -64,6 +65,11 @@
                             <td>{{$item->name}}</td>
                             <td>{{$item->email}}</td>
                             <td>{{date('d/m/Y H:i', strtotime($item->creation_date))}}</td>
+                            <td>
+                                <a class="btn btn-danger" href="{{route('users.deleteUserById', ['id'=>$item->id])}}">
+                                    Delete
+                                </a>
+                            </td>
                         </tr>
                     @empty
                     <h1>Couldn't find any user</h1>

@@ -29,3 +29,5 @@ Route::get('/panels', function () {
 Route::get('/users', 'UserController@getUser')->name('users');
 
 Route::post('/users/addUser', 'UserController@createNewUser')->name('users.createNewUser');
+
+Route::get('users/deleteUser/{id}', 'UserController@deleteUserById')->name('users.deleteUserById');
