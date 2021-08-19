@@ -22,6 +22,15 @@
             <p>Created: {{date('d/m/Y H:i', strtotime($user->created_at))}}</p>
             <p>Last Update: {{date('d/m/Y H:i', strtotime($user->updated_at))}}</p>
             <p>ID: {{$user->id}}</p>
+            <div class="errors col-md-12 text-center mt-3">
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <p class="text-danger">
+                            {{$error}}
+                        </p>
+                    @endforeach
+                @endif
+            </div>
             <div class="col-md-12 text-center">
                 <button class="btn btn-primary w-25">
                     Save

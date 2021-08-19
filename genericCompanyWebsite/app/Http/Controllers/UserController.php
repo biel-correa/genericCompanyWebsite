@@ -59,15 +59,23 @@ class UserController extends Controller
     }
 
     public function saveUserData(Request $request, int $id){
-        $user = User::find($id);
-        if ($user) {
-            $user->name=$request->input('name');
-            $user->email=$request->input('email');
-            $user->save();
-            return $this->editUserById($id);
-        }
-        else{
-            return redirect()->route('users');
+        $validated = $request->validate([
+            'name'=>['required', 'max:100'],
+            'email'=>['required', 'max:255']
+        ]);
+        if ($validated) {
+            $user = User::find($id);
+            if ($user) {
+                $user->name=$request->input('name');
+                $user->email=$request->input('email');
+                $user->save();
+                return redirect()->route('users.editUserById', ['id'=>$id]);
+            }
+            else{
+                return redirect()->route('users.editUserById', ['id'=>$id]);
+            }
+        } else {
+            return redirect()->route('users.editUserById', ['id'=>$id])->withErrors($validated);
         }
     }
 
