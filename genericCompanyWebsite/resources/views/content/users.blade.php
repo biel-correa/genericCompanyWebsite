@@ -35,6 +35,15 @@
                 <div class="col-md-4">
                     <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
+                <div class="errors col-md-12 text-center mt-3">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <p class="text-danger">
+                                {{$error}}
+                            </p>
+                        @endforeach
+                    @endif
+                </div>
                 <div class="col-md-12 text-center mt-3">
                     <button class="btn btn-primary">Salvar</button>
                 </div>

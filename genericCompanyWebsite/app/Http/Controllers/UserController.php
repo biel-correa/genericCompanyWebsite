@@ -10,12 +10,21 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function createNewUser(Request $request){
-        User::create([
-            'name'=>$request->input('name'),
-            'email'=>$request->input('email'),
-            'password'=>Hash::make($request->input('password')),
+        $validated = $request->validate([
+            'name'=>['required', 'max:100'],
+            'email'=>['required', 'max:255'],
+            'password'=>['required', 'max:256']
         ]);
-        return redirect()->route('users');
+        if ($validated) {
+            User::create([
+                'name'=>$request->input('name'),
+                'email'=>$request->input('email'),
+                'password'=>Hash::make($request->input('password')),
+            ]);
+            return redirect()->route('users');
+        } else {
+            return redirect()->route('users')->withErrors($validated);
+        }
     }
 
     public function getUser(){
