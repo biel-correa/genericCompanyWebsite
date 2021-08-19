@@ -14,23 +14,24 @@
             <div class="form-group">
                 <label for="user-name">Name:</label>
                 {{ Form::text('name', $user->name, ['class'=>'form-control', 'id'=>'user-name'])}}
+                @if($errors->has('name'))
+                    <p class="text-danger">
+                        {{ $errors->first('name') }}
+                    </p>
+                @endif
             </div>
             <div class="form-group">
                 <label for="user-email">E-mail:</label>
                 {{ Form::text('email', $user->email, ['class'=>'form-control', 'id'=>'user-email'])}}
+                @if($errors->has('email'))
+                    <p class="text-danger">
+                        {{ $errors->first('email') }}
+                    </p>
+                @endif
             </div>
             <p>Created: {{date('d/m/Y H:i', strtotime($user->created_at))}}</p>
             <p>Last Update: {{date('d/m/Y H:i', strtotime($user->updated_at))}}</p>
             <p>ID: {{$user->id}}</p>
-            <div class="errors col-md-12 text-center mt-3">
-                @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        <p class="text-danger">
-                            {{$error}}
-                        </p>
-                    @endforeach
-                @endif
-            </div>
             <div class="col-md-12 text-center">
                 <button class="btn btn-primary w-25">
                     Save
