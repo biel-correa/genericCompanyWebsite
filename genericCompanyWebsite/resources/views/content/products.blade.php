@@ -28,6 +28,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>
+                            <a class="btn btn-success" href="{{route('product.view', ['id'=>$item->id])}}">View</a>
                             <a class="btn btn-danger" href="{{route('product.delete', ['id'=>$item->id])}}">Delete</a>
                         </td>
                     </tr>

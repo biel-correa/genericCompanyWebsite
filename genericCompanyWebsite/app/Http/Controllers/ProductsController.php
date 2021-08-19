@@ -15,6 +15,11 @@ class ProductsController extends Controller
     public function addProduct(){
         return view('content.product.addProduct');
     }
+    
+    public function view(int $id){
+        $product = Products::find($id);
+        return view('content.product.viewProduct', ['product'=>$product]);
+    }
 
     public function delete(int $id){
         Products::find($id)->delete($id);
