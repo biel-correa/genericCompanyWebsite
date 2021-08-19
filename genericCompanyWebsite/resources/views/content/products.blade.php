@@ -10,4 +10,33 @@
     <!-- End Page Header Right Div -->
 
 </div>
+
+<div class="container">
+    <div class="panel">
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Creation Date</td>
+                    <td>Actions</td>
+                </thead>
+                <tbody>
+                    @forelse ($products as $item)
+                    <tr>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->name}}</td>
+                        <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
+                        <td>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    @empty
+                    <h1>No products were found</h1>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection

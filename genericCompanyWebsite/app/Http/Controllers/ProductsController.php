@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     public function getProducts(){
-        return view('content.products');
+        $products = Products::all();
+        return view('content.products', ['products'=>$products]);
     }
 
     public function addProduct(){
