@@ -18,7 +18,7 @@
     <!-- Start Top Right -->
     <ul class="top-right">
         <li class="dropdown link">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="img/profileimg.png"
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="{{url('img/profileimg.png')}}"
                     alt="img"><b>Jonathan Doe</b><span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
                 <li role="presentation" class="dropdown-header">Profile</li>
