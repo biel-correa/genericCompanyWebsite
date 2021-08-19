@@ -40,6 +40,7 @@ class UserController extends Controller
                 'email'=>$fullUser->email,
                 'password'=>$fullUser->password,
                 'created_at'=>$fullUser->created_at,
+                'updated_at'=>$fullUser->updated_at,
                 'id'=>$fullUser->id
             ];
             return view('content.editUser', ['user'=>$user]);
@@ -53,6 +54,18 @@ class UserController extends Controller
         if ($user) {
             $user->name=$request->input('name');
             $user->email=$request->input('email');
+            $user->save();
+            return $this->editUserById($id);
+        }
+        else{
+            return redirect()->route('users');
+        }
+    }
+
+    public function updateUserPassword(Request $request, int $id){
+        $user = User::find($id);
+        if ($user) {
+            $user->password=Hash::make($request->input('password'));
             $user->save();
             return $this->editUserById($id);
         }

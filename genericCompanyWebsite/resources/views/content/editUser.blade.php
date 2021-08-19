@@ -19,7 +19,8 @@
                 <label for="user-email">E-mail:</label>
                 {{ Form::text('email', $user->email, ['class'=>'form-control', 'id'=>'user-email'])}}
             </div>
-            <p>Created: {{$user->created_at}}</p>
+            <p>Created: {{date('d/m/Y H:i', strtotime($user->created_at))}}</p>
+            <p>Last Update: {{date('d/m/Y H:i', strtotime($user->updated_at))}}</p>
             <p>ID: {{$user->id}}</p>
             <div class="col-md-12 text-center">
                 <button class="btn btn-primary w-25">
@@ -35,6 +36,23 @@
     <div class="panel">
         <div class="panel-body">
             <h1>Edit password</h1>
+            {{Form::open([
+                'route'=>['users.updateUserPassword', $user->id],
+                'method'=>'POST',
+                'class'=>'col-md-12'
+            ])}}
+            <div class="form-group">
+                <label for="user-password">Password:</label>
+                {{ Form::password('password', ['class'=>'form-control', 'id'=>'user-password'])}}
+            </div>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-danger w-25">
+                    Save
+                </button>
+            </div>
+            {{
+                Form::close()
+            }}
         </div>
     </div>
 </div>

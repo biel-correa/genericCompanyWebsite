@@ -36,3 +36,4 @@ Route::get('users/deleteUser/{id}', 'UserController@deleteUserById')->name('user
 Route::get('users/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
 
 Route::post('users/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
+Route::post('users/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
