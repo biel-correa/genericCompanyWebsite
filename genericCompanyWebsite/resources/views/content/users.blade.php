@@ -67,7 +67,7 @@
                     <td>Name</td>
                     <td>E-mail</td>
                     <td>Creation Date</td>
-                    <td>Acitions</td>
+                    <td>Actions</td>
                 </thead>
                 <tbody>
                     @forelse  ($users as $item)
