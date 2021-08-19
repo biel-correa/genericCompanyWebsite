@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,3 +32,7 @@ Route::get('/users', 'UserController@getUser')->name('users');
 Route::post('/users/addUser', 'UserController@createNewUser')->name('users.createNewUser');
 
 Route::get('users/deleteUser/{id}', 'UserController@deleteUserById')->name('users.deleteUserById');
+
+Route::get('users/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
+
+Route::post('users/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');

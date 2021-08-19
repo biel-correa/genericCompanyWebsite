@@ -58,16 +58,18 @@
                     <td>Acitions</td>
                 </thead>
                 <tbody>
-                    {{-- for aqui nos tr td --}}
                     @forelse  ($users as $item)
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->email}}</td>
-                            <td>{{date('d/m/Y H:i', strtotime($item->creation_date))}}</td>
+                            <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                             <td>
                                 <a class="btn btn-danger" href="{{route('users.deleteUserById', ['id'=>$item->id])}}">
                                     Delete
+                                </a>
+                                <a class="btn btn-primary" href="{{route('users.editUserById', ['id'=>$item->id])}}">
+                                    Edit
                                 </a>
                             </td>
                         </tr>
