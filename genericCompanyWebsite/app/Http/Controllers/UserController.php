@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -28,16 +27,12 @@ class UserController extends Controller
     }
 
     public function getUser(){
-        $users = DB::table('users')
-        ->select(array('id', 'name', 'email', 'created_at'))
-        ->get();
+        $users = User::all();
         return view('content.users', ['users'=>$users]);
     }
 
     public function deleteUserById(int $id){
-        DB::table('users')
-        ->where('id', $id)
-        ->delete();
+        User::find($id)->delete($id);
         return redirect()->route('users');
     }
 
