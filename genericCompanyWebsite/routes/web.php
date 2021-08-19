@@ -25,3 +25,7 @@ Route::get('/buttons', function () {
 Route::get('/panels', function () {
     return view('content.uiElements.panels');
 })->name('panels');
+
+Route::get('/users', 'UserController@getUser')->name('users');
+
+Route::post('/users/addUser', 'UserController@createNewUser')->name('users.createNewUser');

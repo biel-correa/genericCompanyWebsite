@@ -15,6 +15,8 @@
                 <li><a href="{{url('/panels')}}">Panels</a></li>
             </ul>
         </li>
+        <li><a href="{{url('/users')}}"><span class="icon color7"><i class="fa fa-users"></i></span>Users<span
+            class="label label-default"></span></a></li>
     </ul>
 
 </div>
