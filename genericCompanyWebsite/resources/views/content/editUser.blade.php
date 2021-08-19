@@ -54,6 +54,13 @@
                 <label for="user-password">Password:</label>
                 {{ Form::password('password', ['class'=>'form-control', 'id'=>'user-password'])}}
             </div>
+            <div class="errors col-md-12 text-center mt-3">
+                @if($errors->has('password'))
+                    <p class="text-danger">
+                        {{ $errors->first('password') }}
+                    </p>
+                @endif
+            </div>
             <div class="col-md-12 text-center">
                 <button class="btn btn-danger w-25">
                     Save

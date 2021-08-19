@@ -80,14 +80,21 @@ class UserController extends Controller
     }
 
     public function updateUserPassword(Request $request, int $id){
-        $user = User::find($id);
-        if ($user) {
-            $user->password=Hash::make($request->input('password'));
-            $user->save();
-            return $this->editUserById($id);
-        }
-        else{
-            return redirect()->route('users');
+        $validated = $request->validate([
+            'password'=>['required', 'max:256']
+        ]);
+        if ($validated) {
+            $user = User::find($id);
+            if ($user) {
+                $user->password=Hash::make($request->input('password'));
+                $user->save();
+                return redirect()->route('users.editUserById', ['id'=>$id]);
+            }
+            else{
+                return redirect()->route('users.editUserById', ['id'=>$id]);
+            }
+        } else {
+            return redirect()->route('users.editUserById', ['id'=>$id])->withErrors($validated);
         }
     }
 }
