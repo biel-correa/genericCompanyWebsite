@@ -39,3 +39,10 @@ Route::prefix('user')->group(function() {
     Route::post('/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
 });
+
+Route::get('/products', 'ProductsController@getProducts')->name('products');
+
+Route::prefix('/product')->group(function() {
+    Route::get('/add', 'ProductsController@addProduct')->name('product.add');
+    Route::post('/saveNewProduct', 'ProductsController@saveNewProduct')->name('product.saveNewProduct');
+});

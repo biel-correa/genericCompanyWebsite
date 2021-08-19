@@ -17,6 +17,8 @@
         </li>
         <li><a href="{{url('/users')}}"><span class="icon color7"><i class="fa fa-users"></i></span>Users<span
             class="label label-default"></span></a></li>
+        <li><a href="{{url('/products')}}"><span class="icon color7"><i class="fa fa-shopping-cart"></i></span>Products<span
+                class="label label-default"></span></a></li>
     </ul>
 
 </div>

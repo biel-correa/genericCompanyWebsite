@@ -2,9 +2,6 @@
 @section('content')
 <div class="page-header">
     <h1 class="title">Users</h1>
-    {{-- <ol class="breadcrumb">
-        <li class="active">You have <span class="label label-danger">5</span> unread messages</li>
-      </ol> --}}
 
     <!-- Start Page Header Right Div -->
     <div class="right">
