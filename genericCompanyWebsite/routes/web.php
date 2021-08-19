@@ -29,11 +29,13 @@ Route::get('/panels', function () {
 
 Route::get('/users', 'UserController@getUser')->name('users');
 
-Route::post('/users/addUser', 'UserController@createNewUser')->name('users.createNewUser');
-
-Route::get('users/deleteUser/{id}', 'UserController@deleteUserById')->name('users.deleteUserById');
-
-Route::get('users/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
-
-Route::post('users/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
-Route::post('users/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
+Route::prefix('user')->group(function() {
+    Route::post('/addUser', 'UserController@createNewUser')->name('users.createNewUser');
+    
+    Route::get('/deleteUser/{id}', 'UserController@deleteUserById')->name('users.deleteUserById');
+    
+    Route::get('/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
+    
+    Route::post('/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
+    Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
+});
