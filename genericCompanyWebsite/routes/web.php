@@ -44,5 +44,6 @@ Route::get('/products', 'ProductsController@getProducts')->name('products');
 
 Route::prefix('/product')->group(function() {
     Route::get('/add', 'ProductsController@addProduct')->name('product.add');
+    Route::get('/delete/{id}', 'ProductsController@delete')->name('product.delete');
     Route::post('/saveNewProduct', 'ProductsController@saveNewProduct')->name('product.saveNewProduct');
 });

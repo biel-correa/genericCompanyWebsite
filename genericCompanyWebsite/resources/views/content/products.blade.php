@@ -28,7 +28,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>
-                            <button class="btn btn-danger">Delete</button>
+                            <a class="btn btn-danger" href="{{route('product.delete', ['id'=>$item->id])}}">Delete</a>
                         </td>
                     </tr>
                     @empty

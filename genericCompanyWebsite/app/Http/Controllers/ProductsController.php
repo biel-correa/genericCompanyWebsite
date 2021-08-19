@@ -16,6 +16,11 @@ class ProductsController extends Controller
         return view('content.product.addProduct');
     }
 
+    public function delete(int $id){
+        Products::find($id)->delete($id);
+        return redirect()->route('products');
+    }
+
     public function saveNewProduct(Request $request){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
