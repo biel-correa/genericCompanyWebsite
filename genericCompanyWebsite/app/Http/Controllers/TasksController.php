@@ -25,7 +25,8 @@ class TasksController extends Controller
 
     public function edit(int $id){
         $task=Tasks::find($id);
-        return view('content.task.editTask', ['task'=>$task]);
+        $users=User::all();
+        return view('content.task.editTask', ['task'=>$task, 'users'=>$users]);
     }
 
     public function delete(int $id){
@@ -56,13 +57,17 @@ class TasksController extends Controller
     public function saveEdit(Request $request, $id){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
-            'description'=>['max:1000']
+            'description'=>['max:1000'],
+            'requester_id'=>['required'],
+            'user_assigned_id'=>['required']
         ]);
         if ($validated) {
             $task = Tasks::find($id);
             if ($task) {
                 $task->name=$request->input('name');
                 $task->description=$request->input('description');
+                $task->requester_id=$request->input('requester_id');
+                $task->user_assigned_id=$request->input('user_assigned_id');
                 $task->save();
                 return redirect()->route('task.edit', ['id'=>$id]);
             } else {
