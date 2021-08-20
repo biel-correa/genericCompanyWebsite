@@ -22,7 +22,7 @@
                     <td>Actions</td>
                 </thead>
                 <tbody>
-                    @forelse ($Tasks as $item)
+                    @forelse ($tasks as $item)
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>

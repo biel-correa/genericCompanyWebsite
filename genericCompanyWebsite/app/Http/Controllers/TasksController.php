@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class TasksController extends Controller
 {
     public function getTasks(){
-        $Tasks = Tasks::all();
-        return view('content.tasks', ['Tasks'=>$Tasks]);
+        $tasks = Tasks::all();
+        return view('content.tasks', ['tasks'=>$tasks]);
     }
 
     public function addProduct(){
@@ -17,8 +17,8 @@ class TasksController extends Controller
     }
     
     public function view(int $id){
-        $product = Tasks::find($id);
-        return view('content.task.viewTask', ['task'=>$product]);
+        $task = Tasks::find($id);
+        return view('content.task.viewTask', ['task'=>$task]);
     }
 
     public function edit(int $id){
