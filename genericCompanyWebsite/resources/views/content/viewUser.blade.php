@@ -16,6 +16,29 @@
     </div>
     <div class="panel">
         <div class="panel-body">
+            <h1>Tasks assined</h1>
+            <table class="table">
+                <thead>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Created at</td>
+                </thead>
+                <tbody>
+                    @forelse ($user->tasksAssined as $task)
+                        <tr>
+                            <td>{{$task->id}}</td>
+                            <td>{{$task->name}}</td>
+                            <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
+                        </tr>
+                    @empty
+                        <h1>No tasks were assigned</h1>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-body">
             <h1>Tasks created</h1>
             <table class="table">
                 <thead>
@@ -24,14 +47,14 @@
                     <td>Created at</td>
                 </thead>
                 <tbody>
-                    @forelse ($user->tasks as $task)
+                    @forelse ($user->tasksCreated as $task)
                         <tr>
                             <td>{{$task->id}}</td>
                             <td>{{$task->name}}</td>
                             <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
                         </tr>
                     @empty
-                        <h1>No tasks were assigned</h1>
+                        <h1>No tasks were created</h1>
                     @endforelse
                 </tbody>
             </table>

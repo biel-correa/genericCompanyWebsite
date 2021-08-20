@@ -4,20 +4,28 @@
     <h1 class="title">About {{$task->name}}</h1>
 </div>
 <div class="container">
-    <div class="panel">
-        <div class="panel-body">
-            <h1>Description</h1>
-            <p>{{$task->description}}</p>
+    @if ($task->description)
+        <div class="panel">
+            <div class="panel-body">
+                <h1>Description</h1>
+                <p>{{$task->description}}</p>
+            </div>
         </div>
-    </div>
+    @endif
     <div class="panel">
         <div class="panel-body">
             <h1>Related</h1>
             <ul>
                 <li>
-                    Requester Name:
-                    <a href="{{route('users.editUserById', ['id'=>$task->requester->id])}}">
+                    Requester:
+                    <a href="{{route('users.view', ['id'=>$task->requester->id])}}">
                     {{$task->requester->name}}
+                    </a>
+                </li>
+                <li>
+                    Assined to:
+                    <a href="{{route('users.view', ['id'=>$task->assinedTo->id])}}">
+                    {{$task->assinedTo->name}}
                     </a>
                 </li>
             </ul>

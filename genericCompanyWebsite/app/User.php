@@ -27,8 +27,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function tasks()
+    public function tasksCreated()
     {
         return $this->hasMany(Tasks::class, 'requester_id', 'id');
+    }
+
+    public function tasksAssined() {
+        return $this->hasMany(Tasks::class, 'user_assigned_id', 'id');
     }
 }

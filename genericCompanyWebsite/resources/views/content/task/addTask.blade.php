@@ -41,6 +41,24 @@
                     @endif
                 </div>
                 <div class="row mb-3">
+                    <label for="task-assined">Assign the task to someone</label>
+                    @if (count($users) < 1)
+                        <h1>No users where found</h1>
+                    @else
+                        <select name="user_assigned_id" id="task-assined" class="form-control">
+                            <option value="">Assign to someone</option>
+                            @foreach ($users as $user)
+                                <option value="{{$user->id}}">{{$user->name}}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                    @if($errors->has('user_assigned_id'))
+                        <p class="text-danger">
+                            {{ $errors->first('user_assigned_id') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="row mb-3">
                     <label for="task-description">Description: </label>
                     <textarea type="text" name="description" class="form-control" id="task-description" rows="5"></textarea>
                     @if($errors->has('description'))

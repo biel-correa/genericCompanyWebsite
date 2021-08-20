@@ -37,13 +37,15 @@ class TasksController extends Controller
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
             'description'=>['max:1000'],
-            'requester_id'=>['required']
+            'requester_id'=>['required'],
+            'user_assigned_id'=>['required']
         ]);
         if ($validated) {
             Tasks::create([
                 'name'=>$request->input('name'),
                 'description'=>$request->input('description'),
-                'requester_id'=>$request->input('requester_id')
+                'requester_id'=>$request->input('requester_id'),
+                'user_assigned_id'=>$request->input('user_assigned_id')
             ]);
             return redirect()->route('tasks');
         }else{
