@@ -24,8 +24,8 @@
                 </li>
                 <li>
                     Assined to:
-                    <a href="{{route('users.view', ['id'=>$task->assinedTo->id])}}">
-                    {{$task->assinedTo->name}}
+                    <a href="{{route('users.view', ['id'=>$task->assignedTo->id])}}">
+                    {{$task->assignedTo->name}}
                     </a>
                 </li>
             </ul>

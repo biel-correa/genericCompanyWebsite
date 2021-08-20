@@ -20,15 +20,23 @@
             <table class="table">
                 <thead>
                     <td>Id</td>
-                    <td>Name</td>
+                    <td>Task</td>
+                    <td>Creator</td>
                     <td>Created at</td>
+                    <td>Actions</td>
                 </thead>
                 <tbody>
                     @forelse ($user->tasksAssined as $task)
                         <tr>
                             <td>{{$task->id}}</td>
                             <td>{{$task->name}}</td>
+                            <td>{{$task->requester->name}}</td>
                             <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
+                            <td>
+                                <a href="{{route('task.view', ['id'=>$task->id])}}" class="btn btn-success">
+                                    View
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <h1>No tasks were assigned</h1>
@@ -44,14 +52,22 @@
                 <thead>
                     <td>Id</td>
                     <td>Name</td>
+                    <td>Assigned</td>
                     <td>Created at</td>
+                    <td>Actions</td>
                 </thead>
                 <tbody>
                     @forelse ($user->tasksCreated as $task)
                         <tr>
                             <td>{{$task->id}}</td>
                             <td>{{$task->name}}</td>
+                            <td>{{$task->assignedTo->name}}</td>
                             <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
+                            <td>
+                                <a href="{{route('task.view', ['id'=>$task->id])}}" class="btn btn-success">
+                                    View
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <h1>No tasks were created</h1>

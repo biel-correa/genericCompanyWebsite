@@ -15,7 +15,7 @@ class Tasks extends Model
         return $this->hasOne(User::class, 'id', 'requester_id');
     }
 
-    public function assinedTo() {
+    public function assignedTo() {
         return $this->hasOne(User::class, 'id', 'user_assigned_id');
     }
 }

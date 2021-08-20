@@ -17,7 +17,8 @@
             <table class="table">
                 <thead>
                     <td>Id</td>
-                    <td>Name</td>
+                    <td>Task</td>
+                    <td>Assigned to</td>
                     <td>Creation Date</td>
                     <td>Actions</td>
                 </thead>
@@ -26,6 +27,7 @@
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
+                        <td>{{$item->assignedTo->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>
                             <a class="btn btn-success" href="{{route('task.view', ['id'=>$item->id])}}">View</a>
