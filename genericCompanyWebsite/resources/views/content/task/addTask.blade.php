@@ -59,6 +59,10 @@
                     @endif
                 </div>
                 <div class="row mb-3">
+                    <label for="task-expiration">Expiration date:</label>
+                    {{ Form::date('expiration_date', null, ['class'=>'form-control']) }} 
+                </div>
+                <div class="row mb-3">
                     <label for="task-description">Description: </label>
                     <textarea type="text" name="description" class="form-control" id="task-description" rows="5"></textarea>
                     @if($errors->has('description'))

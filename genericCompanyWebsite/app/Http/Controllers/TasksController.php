@@ -46,7 +46,8 @@ class TasksController extends Controller
                 'name'=>$request->input('name'),
                 'description'=>$request->input('description'),
                 'requester_id'=>$request->input('requester_id'),
-                'user_assigned_id'=>$request->input('user_assigned_id')
+                'user_assigned_id'=>$request->input('user_assigned_id'),
+                'expiration_date'=>$request->input('expiration_date')
             ]);
             return redirect()->route('tasks');
         }else{
@@ -68,6 +69,7 @@ class TasksController extends Controller
                 $task->description=$request->input('description');
                 $task->requester_id=$request->input('requester_id');
                 $task->user_assigned_id=$request->input('user_assigned_id');
+                $task->expiration_date=$request->input('expiration_date');
                 $task->save();
                 return redirect()->route('task.edit', ['id'=>$id]);
             } else {
