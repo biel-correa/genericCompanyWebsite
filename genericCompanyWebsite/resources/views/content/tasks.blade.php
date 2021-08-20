@@ -29,7 +29,7 @@
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>
                             <a class="btn btn-success" href="{{route('task.view', ['id'=>$item->id])}}">View</a>
-                            <a class="btn btn-primary" href="{{route('task.view', ['id'=>$item->id])}}">Edit</a>
+                            <a class="btn btn-primary" href="{{route('task.edit', ['id'=>$item->id])}}">Edit</a>
                             <a class="btn btn-danger" href="{{route('task.delete', ['id'=>$item->id])}}">Delete</a>
                         </td>
                     </tr>
