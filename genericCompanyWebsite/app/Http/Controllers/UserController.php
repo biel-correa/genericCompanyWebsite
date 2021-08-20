@@ -69,7 +69,7 @@ class UserController extends Controller
                 $user->name=$request->input('name');
                 $user->email=$request->input('email');
                 $user->save();
-                return redirect()->route('users.editUserById', ['id'=>$id]);
+                return redirect()->route('users');
             }
             else{
                 return redirect()->route('users.editUserById', ['id'=>$id]);
@@ -88,7 +88,7 @@ class UserController extends Controller
             if ($user) {
                 $user->password=Hash::make($request->input('password'));
                 $user->save();
-                return redirect()->route('users.editUserById', ['id'=>$id]);
+                return redirect()->route('users');
             }
             else{
                 return redirect()->route('users.editUserById', ['id'=>$id]);

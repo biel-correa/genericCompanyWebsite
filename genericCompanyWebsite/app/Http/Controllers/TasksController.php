@@ -71,7 +71,7 @@ class TasksController extends Controller
                 $task->user_assigned_id=$request->input('user_assigned_id');
                 $task->expiration_date=$request->input('expiration_date');
                 $task->save();
-                return redirect()->route('task.edit', ['id'=>$id]);
+                return redirect()->route('tasks');
             } else {
                 return redirect()->route('task.add');
             }

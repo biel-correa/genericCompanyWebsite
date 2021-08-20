@@ -2,13 +2,6 @@
 @section('content')
 <div class="page-header">
     <h1 class="title">Users</h1>
-
-    <!-- Start Page Header Right Div -->
-    <div class="right">
-        <a class="btn btn-success" onclick="openAddUser()"><i class="fa fa-user-plus"></i> ADD</a>
-    </div>
-    <!-- End Page Header Right Div -->
-
 </div>
 
 <div class="container d-none" id="add-user-container">
@@ -80,7 +73,7 @@
                                 <a class="btn btn-success" href="{{route('users.view', ['id'=>$item->id])}}">
                                     View
                                 </a>
-                                @if (count($item->tasksAssined) == 0 || count($item->tasksCreated) == 0)
+                                @if (count($item->tasksAssined) == 0 && count($item->tasksCreated) == 0)
                                     <a class="btn btn-danger" href="{{route('users.deleteUserById', ['id'=>$item->id])}}">
                                         Delete
                                     </a>
