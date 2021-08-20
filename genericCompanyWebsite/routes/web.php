@@ -35,6 +35,8 @@ Route::prefix('user')->group(function() {
     Route::get('/deleteUser/{id}', 'UserController@deleteUserById')->name('users.deleteUserById');
     
     Route::get('/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
+
+    Route::get('/{id}', 'UserController@viewUser')->name('users.view');
     
     Route::post('/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');

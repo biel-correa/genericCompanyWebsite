@@ -31,6 +31,11 @@ class UserController extends Controller
         return view('content.users', ['users'=>$users]);
     }
 
+    public function viewUser(int $id){
+        $user = User::find($id);
+        return view('content.viewUser', ['user'=>$user]);
+    }
+
     public function deleteUserById(int $id){
         User::find($id)->delete($id);
         return redirect()->route('users');
