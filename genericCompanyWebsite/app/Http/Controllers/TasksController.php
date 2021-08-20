@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tasks;
+use App\User;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -12,8 +13,9 @@ class TasksController extends Controller
         return view('content.tasks', ['tasks'=>$tasks]);
     }
 
-    public function addProduct(){
-        return view('content.task.addTask');
+    public function addTask(){
+        $users = User::all();
+        return view('content.task.addTask', ['users'=>$users]);
     }
     
     public function view(int $id){
@@ -31,15 +33,17 @@ class TasksController extends Controller
         return redirect()->route('tasks');
     }
 
-    public function saveNewProduct(Request $request){
+    public function saveNewTask(Request $request){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
-            'description'=>['max:1000']
+            'description'=>['max:1000'],
+            'requester_id'=>['required']
         ]);
         if ($validated) {
             Tasks::create([
                 'name'=>$request->input('name'),
-                'description'=>$request->input('description')
+                'description'=>$request->input('description'),
+                'requester_id'=>$request->input('requester_id')
             ]);
             return redirect()->route('tasks');
         }else{

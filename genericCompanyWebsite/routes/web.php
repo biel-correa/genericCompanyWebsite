@@ -45,10 +45,10 @@ Route::prefix('user')->group(function() {
 Route::get('/tasks', 'TasksController@getTasks')->name('tasks');
 
 Route::prefix('/task')->group(function() {
-    Route::get('/add', 'TasksController@addProduct')->name('task.add');
+    Route::get('/add', 'TasksController@addTask')->name('task.add');
     Route::get('/delete/{id}', 'TasksController@delete')->name('task.delete');
     Route::get('/{id}', 'TasksController@view')->name('task.view');
     Route::get('/edit/{id}', 'TasksController@edit')->name('task.edit');
-    Route::post('/saveNewTask', 'TasksController@saveNewProduct')->name('task.saveNewProduct');
+    Route::post('/saveNewTask', 'TasksController@saveNewTask')->name('task.saveNewTask');
     Route::post('/saveEdit/{id}', 'TasksController@saveEdit')->name('task.saveEdit');
 });
