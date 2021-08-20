@@ -14,70 +14,76 @@
                 ])
             }}
                 <div class="row mb-3">
-                    <label for="task-name">Name: </label>
-                    {{ Form::text('name', $task->name, ['class'=>'form-control mb-3', 'id'=>'task-name'])}}
-                    @if($errors->has('name'))
-                        <p class="text-danger">
-                            {{ $errors->first('name') }}
-                        </p>
-                    @endif
+                    <div class="col-md-6">
+                        <label for="task-name">Name: </label>
+                        {{ Form::text('name', $task->name, ['class'=>'form-control mb-3', 'id'=>'task-name'])}}
+                        @if($errors->has('name'))
+                            <p class="text-danger">
+                                {{ $errors->first('name') }}
+                            </p>
+                        @endif
+                    </div>
+                    <div class="col-md-6">
+                        <label for="task-expiration">Expiration date:</label>
+                        {{ Form::date('expiration_date', $task->expiration_date, ['class'=>'form-control']) }} 
+                    </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="task-requester">Select a requester</label>
-                    @if (count($users) < 1)
+                    <div class="col-md-6">
+                        <label for="task-requester">Select a requester</label>
+                        @if (count($users) < 1)
                         <h1>No users where found</h1>
-                    @else
-                        <select name="requester_id" id="task-requester" class="form-control">
-                            <option value="">Select a requester</option>
-                            @foreach ($users as $user)
-                                @if ($user->id == $task->requester_id)
+                        @else
+                            <select name="requester_id" id="task-requester" class="form-control">
+                                <option value="">Select a requester</option>
+                                @foreach ($users as $user)
+                                    @if ($user->id == $task->requester_id)
+                                        <option value="{{$user->id}}" selected>{{$user->name}}</option>    
+                                    @else
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        @endif
+                        @if($errors->has('requester_id'))
+                            <p class="text-danger">
+                                {{ $errors->first('requester_id') }}
+                            </p>
+                        @endif
+                    </div>
+                    <div class="col-md-6">
+                        <label for="task-assined">Assign the task to someone</label>
+                        @if (count($users) < 1)
+                            <h1>No users where found</h1>
+                        @else
+                            <select name="user_assigned_id" id="task-assined" class="form-control">
+                                <option value="">Assign to someone</option>
+                                @foreach ($users as $user)
+                                @if ($user->id == $task->user_assigned_id)
                                     <option value="{{$user->id}}" selected>{{$user->name}}</option>    
                                 @else
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endif
-                            @endforeach
-                        </select>
-                    @endif
-                    @if($errors->has('requester_id'))
-                        <p class="text-danger">
-                            {{ $errors->first('requester_id') }}
-                        </p>
-                    @endif
+                                @endforeach
+                            </select>
+                        @endif
+                        @if($errors->has('user_assigned_id'))
+                            <p class="text-danger">
+                                {{ $errors->first('user_assigned_id') }}
+                            </p>
+                        @endif
+                    </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="task-assined">Assign the task to someone</label>
-                    @if (count($users) < 1)
-                        <h1>No users where found</h1>
-                    @else
-                        <select name="user_assigned_id" id="task-assined" class="form-control">
-                            <option value="">Assign to someone</option>
-                            @foreach ($users as $user)
-                            @if ($user->id == $task->user_assigned_id)
-                                <option value="{{$user->id}}" selected>{{$user->name}}</option>    
-                            @else
-                                <option value="{{$user->id}}">{{$user->name}}</option>
-                            @endif
-                            @endforeach
-                        </select>
-                    @endif
-                    @if($errors->has('user_assigned_id'))
-                        <p class="text-danger">
-                            {{ $errors->first('user_assigned_id') }}
-                        </p>
-                    @endif
-                </div>
-                <div class="row mb-3">
-                    <label for="task-expiration">Expiration date:</label>
-                    {{ Form::date('expiration_date', $task->expiration_date, ['class'=>'form-control']) }} 
-                </div>
-                <div class="row mb-3">
-                    <label for="task-description">Description: </label>
-                    {{ Form::textarea('description', $task->description, ['class'=>'form-control mb-3', 'id'=>'task-description'])}}
-                    @if($errors->has('description'))
-                        <p class="text-danger">
-                            {{ $errors->first('description') }}
-                        </p>
-                    @endif
+                    <div class="col-md-12">
+                        <label for="task-description">Description: </label>
+                        {{ Form::textarea('description', $task->description, ['class'=>'form-control mb-3', 'id'=>'task-description'])}}
+                        @if($errors->has('description'))
+                            <p class="text-danger">
+                                {{ $errors->first('description') }}
+                            </p>
+                        @endif
+                    </div>
                 </div>
                 <div class="col-md-12 text-center">
                     <button class="btn btn-primary w-25">Save</button>

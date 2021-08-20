@@ -2,7 +2,9 @@
 
     <!-- Start App Logo -->
     <div class="applogo">
-        <a href="index.html" class="logo">kode</a>
+        <a href="{{route('home')}}" class="logo">
+            <img src="{{asset('img/logo.png')}}" alt="">
+        </a>
     </div>
     <!-- End App Logo -->
 
