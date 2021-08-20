@@ -12,6 +12,14 @@
             </div>
         </div>
     @endif
+    @if (!$task->description)
+        <div class="panel">
+            <div class="panel-body text-center">
+                <h1>There is no description for this task</h1>
+                <a class="btn btn-success" href="{{route('task.edit', ['id'=>$task->id])}}">Add one</a>
+            </div>
+        </div>
+    @endif
     <div class="panel">
         <div class="panel-body">
             <h1>Related</h1>
