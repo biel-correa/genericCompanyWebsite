@@ -28,103 +28,103 @@
 
   @include('layouts.tabpanel')
 
-  <script type="text/javascript" src="{{url('js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
 
   <!-- ================================================
 Bootstrap Core JavaScript File
 ================================================ -->
-  <script src="{{url('js/bootstrap/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
 
   <!-- ================================================
 Plugin.js - Some Specific JS codes for Plugin Settings
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/plugins.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/plugins.js')}}"></script>
 
   <!-- ================================================
 Bootstrap Select
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/bootstrap-select/bootstrap-select.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/bootstrap-select/bootstrap-select.js')}}"></script>
 
   <!-- ================================================
 Bootstrap Toggle
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
 
   <!-- ================================================
 Bootstrap WYSIHTML5
 ================================================ -->
   <!-- main file -->
-  <script type="text/javascript" src="{{url('js/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js')}}"></script>
   <!-- bootstrap file -->
-  <script type="text/javascript" src="{{url('js/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/bootstrap-wysihtml5/bootstrap-wysihtml5.js')}}"></script>
 
   <!-- ================================================
 Summernote
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/summernote/summernote.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/summernote/summernote.min.js')}}"></script>
 
   <!-- ================================================
 Flot Chart
 ================================================ -->
   <!-- main file -->
-  <script type="text/javascript" src="{{url('js/flot-chart/flot-chart.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/flot-chart/flot-chart.js')}}"></script>
   <!-- time.js -->
-  <script type="text/javascript" src="{{url('js/flot-chart/flot-chart-time.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/flot-chart/flot-chart-time.js')}}"></script>
   <!-- stack.js -->
-  <script type="text/javascript" src="{{url('js/flot-chart/flot-chart-stack.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/flot-chart/flot-chart-stack.js')}}"></script>
   <!-- pie.js -->
-  <script type="text/javascript" src="{{url('js/flot-chart/flot-chart-pie.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/flot-chart/flot-chart-pie.js')}}"></script>
   <!-- demo codes -->
-  <script type="text/javascript" src="{{url('js/flot-chart/flot-chart-plugin.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/flot-chart/flot-chart-plugin.js')}}"></script>
 
   <!-- ================================================
 Chartist
 ================================================ -->
   <!-- main file -->
-  <script type="text/javascript" src="{{url('js/chartist/chartist.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/chartist/chartist.js')}}"></script>
   <!-- demo codes -->
-  <script type="text/javascript" src="{{url('js/chartist/chartist-plugin.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/chartist/chartist-plugin.js')}}"></script>
 
   <!-- ================================================
 Easy Pie Chart
 ================================================ -->
   <!-- main file -->
-  <script type="text/javascript" src="{{url('js/easypiechart/easypiechart.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/easypiechart/easypiechart.js')}}"></script>
   <!-- demo codes -->
-  <script type="text/javascript" src="{{url('js/easypiechart/easypiechart-plugin.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/easypiechart/easypiechart-plugin.js')}}"></script>
 
   <!-- ================================================
 Sparkline
 ================================================ -->
   <!-- main file -->
-  <script type="text/javascript" src="{{url('js/sparkline/sparkline.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/sparkline/sparkline.js')}}"></script>
   <!-- demo codes -->
-  <script type="text/javascript" src="{{url('js/sparkline/sparkline-plugin.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/sparkline/sparkline-plugin.js')}}"></script>
 
   <!-- ================================================
 Rickshaw
 ================================================ -->
   <!-- d3 -->
-  <script src="{{url('js/rickshaw/d3.v3.js')}}"></script>
+  <script src="{{asset('js/rickshaw/d3.v3.js')}}"></script>
   <!-- main file -->
-  <script src="{{url('js/rickshaw/rickshaw.js')}}"></script>
+  <script src="{{asset('js/rickshaw/rickshaw.js')}}"></script>
   <!-- demo codes -->
-  <script src="{{url('js/rickshaw/rickshaw-plugin.js')}}"></script>
+  <script src="{{asset('js/rickshaw/rickshaw-plugin.js')}}"></script>
 
   <!-- ================================================
 Data Tables
 ================================================ -->
-  <script src="{{url('js/datatables/datatables.min.js')}}"></script>
+  <script src="{{asset('js/datatables/datatables.min.js')}}"></script>
 
   <!-- ================================================
 Sweet Alert
 ================================================ -->
-  <script src="{{url('js/sweet-alert/sweet-alert.min.js')}}"></script>
+  <script src="{{asset('js/sweet-alert/sweet-alert.min.js')}}"></script>
 
   <!-- ================================================
 Kode Alert
 ================================================ -->
-  <script src="{{url('js/kode-alert/main.js')}}"></script>
+  <script src="{{asset('js/kode-alert/main.js')}}"></script>
 
   <!-- ================================================
 Gmaps
@@ -132,19 +132,19 @@ Gmaps
   <!-- google maps api -->
   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <!-- main file -->
-  <script src="{{url('js/gmaps/gmaps.js')}}"></script>
+  <script src="{{asset('js/gmaps/gmaps.js')}}"></script>
   <!-- demo codes -->
-  <script src="{{url('js/gmaps/gmaps-plugin.js')}}"></script>
+  <script src="{{asset('js/gmaps/gmaps-plugin.js')}}"></script>
 
   <!-- ================================================
 jQuery UI
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/jquery-ui/jquery-ui.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/jquery-ui/jquery-ui.min.js')}}"></script>
 
   <!-- ================================================
 Moment.js
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/moment/moment.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/moment/moment.min.js')}}"></script>
 
   <!-- ================================================
 Full Calendar
@@ -154,7 +154,7 @@ Full Calendar
   <!-- ================================================
 Bootstrap Date Range Picker
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/date-range-picker/daterangepicker.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/date-range-picker/daterangepicker.js')}}"></script>
 
   <script>
     // set up our data series with 50 random data points
