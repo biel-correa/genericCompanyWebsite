@@ -149,7 +149,7 @@ Moment.js
   <!-- ================================================
 Full Calendar
 ================================================ -->
-  <script type="text/javascript" src="{{url('js/full-calendar/fullcalendar.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/full-calendar/fullcalendar.js')}}"></script>
 
   <!-- ================================================
 Bootstrap Date Range Picker

@@ -73,7 +73,7 @@
 
             <ul class="todo-list">
                 <li class="checkbox checkbox-primary">
-                    <input id="checkboxside1" type="checkbox"><label for="checkboxside1">Add new products</label>
+                    <input id="checkboxside1" type="checkbox"><label for="checkboxside1">Add new Tasks</label>
                 </li>
 
                 <li class="checkbox checkbox-primary">

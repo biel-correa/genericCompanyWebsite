@@ -40,11 +40,11 @@ Route::prefix('user')->group(function() {
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
 });
 
-Route::get('/products', 'ProductsController@getProducts')->name('products');
+Route::get('/tasks', 'TasksController@getTasks')->name('tasks');
 
-Route::prefix('/product')->group(function() {
-    Route::get('/add', 'ProductsController@addProduct')->name('product.add');
-    Route::get('/delete/{id}', 'ProductsController@delete')->name('product.delete');
-    Route::get('/{id}', 'ProductsController@view')->name('product.view');
-    Route::post('/saveNewProduct', 'ProductsController@saveNewProduct')->name('product.saveNewProduct');
+Route::prefix('/task')->group(function() {
+    Route::get('/add', 'TasksController@addProduct')->name('task.add');
+    Route::get('/delete/{id}', 'TasksController@delete')->name('task.delete');
+    Route::get('/{id}', 'TasksController@view')->name('task.view');
+    Route::post('/saveNewTask', 'TasksController@saveNewProduct')->name('task.saveNewProduct');
 });

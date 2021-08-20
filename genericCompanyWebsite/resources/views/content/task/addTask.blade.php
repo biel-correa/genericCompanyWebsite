@@ -8,7 +8,7 @@
         <div class="panel-body">
             {{
                 Form::open([
-                    'route'=>['product.saveNewProduct'],
+                    'route'=>['task.saveNewProduct'],
                     'method'=>'POST',
                     'class'=>'col-md-12'
                 ])
