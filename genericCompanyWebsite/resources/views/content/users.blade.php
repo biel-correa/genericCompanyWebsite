@@ -80,9 +80,15 @@
                                 <a class="btn btn-success" href="{{route('users.view', ['id'=>$item->id])}}">
                                     View
                                 </a>
-                                <a class="btn btn-danger" href="{{route('users.deleteUserById', ['id'=>$item->id])}}">
-                                    Delete
-                                </a>
+                                @if (count($item->tasksAssined) == 0 || count($item->tasksCreated) == 0)
+                                    <a class="btn btn-danger" href="{{route('users.deleteUserById', ['id'=>$item->id])}}">
+                                        Delete
+                                    </a>
+                                @else
+                                    <button class="btn btn-danger" disabled>
+                                        Delete
+                                    </button>
+                                @endif
                                 <a class="btn btn-primary" href="{{route('users.editUserById', ['id'=>$item->id])}}">
                                     Edit
                                 </a>
