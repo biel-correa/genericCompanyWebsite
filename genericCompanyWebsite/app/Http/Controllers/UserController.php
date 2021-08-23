@@ -45,6 +45,14 @@ class UserController extends Controller
         return redirect()->route('users');
     }
 
+    public function search(Request $request) {
+        if ($request->search == "") {
+            return redirect()->route('users');
+        }
+        $users = User::where('name', 'LIKE', '%' . $request->search . '%')->get();
+        return view('content.users', ['users'=>$users]);
+    }
+
     public function editUserById(int $id){
         $fullUser = User::find($id);
         if ($fullUser) {

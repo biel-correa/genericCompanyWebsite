@@ -12,6 +12,22 @@
 <div class="container mb-3">
     <div class="panel">
         <div class="panel-body table-responsive">
+            <div class="row">
+                {{
+                    Form::open([
+                        'route'=>['users.search'],
+                        'method'=>'POST',
+                        'class'=>'col-md-12'
+                    ])
+                }}
+                <div class="flex">
+                    <input type="text" name="search" placeholder="Search by name">
+                    <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+                {{
+                    Form::close()
+                }}
+            </div>
             <table class="table">
                 <thead>
                     <td>ID</td>

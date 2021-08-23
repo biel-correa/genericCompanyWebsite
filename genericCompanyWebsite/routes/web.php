@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,6 +37,7 @@ Route::prefix('user')->group(function() {
 
     Route::get('/{id}', 'UserController@viewUser')->name('users.view');
 
+    Route::post('/search', 'UserController@search')->name('users.search');
     Route::post('/createNewUser', 'UserController@createNewUser')->name('users.createNewUser');    
     Route::post('/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
