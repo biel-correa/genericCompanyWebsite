@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function viewUser(int $id){
         $user = User::find($id);
-        return view('content.viewUser', ['user'=>$user]);
+        return view('content.users.viewUser', ['user'=>$user]);
     }
 
     public function deleteUserById(int $id){
@@ -52,7 +52,7 @@ class UserController extends Controller
                 'updated_at'=>$fullUser->updated_at,
                 'id'=>$fullUser->id
             ];
-            return view('content.editUser', ['user'=>$user]);
+            return view('content.users.editUser', ['user'=>$user]);
         }else{
             return redirect()->route('users');
         }
