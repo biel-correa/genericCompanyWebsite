@@ -5,6 +5,9 @@
     <ol class="breadcrumb">
         <li class="active">Users</li>
     </ol>
+    <div class="right">
+        <a class="btn btn-success" href="{{ route('users.addUser') }}"><i class="fa fa-user-plus"></i> ADD</a>
+    </div>
 </div>
 
 <div class="container d-none" id="add-user-container">
@@ -98,18 +101,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    function openAddUser(){
-        let container = document.getElementById('add-user-container')
-        if(container.classList.contains('d-block')){
-            container.classList.add('d-none')
-            container.classList.remove('d-block')
-        }else{
-            container.classList.add('d-block')
-            container.classList.remove('d-none')
-        }
-    }
-
-</script>
 @endsection

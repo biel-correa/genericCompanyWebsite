@@ -26,6 +26,10 @@ class UserController extends Controller
         }
     }
 
+    public function addUser(){
+        return view('content.users.addUser');
+    }
+
     public function getUser(){
         $users = User::all();
         return view('content.users', ['users'=>$users]);

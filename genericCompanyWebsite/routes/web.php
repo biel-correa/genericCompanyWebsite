@@ -30,14 +30,15 @@ Route::get('/panels', function () {
 Route::get('/users', 'UserController@getUser')->name('users');
 
 Route::prefix('user')->group(function() {
-    Route::post('/addUser', 'UserController@createNewUser')->name('users.createNewUser');
+    Route::get('/addUser', 'UserController@addUser')->name('users.addUser');
     
     Route::get('/deleteUser/{id}', 'UserController@deleteUserById')->name('users.deleteUserById');
     
     Route::get('/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
 
     Route::get('/{id}', 'UserController@viewUser')->name('users.view');
-    
+
+    Route::post('/createNewUser', 'UserController@createNewUser')->name('users.createNewUser');    
     Route::post('/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
 });
