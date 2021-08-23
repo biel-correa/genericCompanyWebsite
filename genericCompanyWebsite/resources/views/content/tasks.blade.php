@@ -30,7 +30,7 @@
                     @forelse ($tasks as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
+                        <td>{{strlen($item->name) > 50 ? substr($item->name,0,50)."..." : $item->name}}</td>
                         <td>{{$item->assignedTo->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>

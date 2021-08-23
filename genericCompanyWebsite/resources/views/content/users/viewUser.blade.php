@@ -33,7 +33,7 @@
                     @forelse ($user->tasksAssined as $task)
                         <tr>
                             <td>{{$task->id}}</td>
-                            <td>{{$task->name}}</td>
+                            <td>{{strlen($task->name) > 50 ? substr($task->name,0,50)."..." : $task->name}}</td>
                             <td>{{$task->requester->name}}</td>
                             <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
                             <td>
@@ -64,7 +64,7 @@
                     @forelse ($user->tasksCreated as $task)
                         <tr>
                             <td>{{$task->id}}</td>
-                            <td>{{$task->name}}</td>
+                            <td>{{strlen($task->name) > 50 ? substr($task->name,0,50)."..." : $task->name}}</td>
                             <td>{{$task->assignedTo->name}}</td>
                             <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
                             <td>
