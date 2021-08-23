@@ -34,6 +34,14 @@ class TasksController extends Controller
         return redirect()->route('tasks');
     }
 
+    public function search(Request $request) {
+        if ($request->search == "") {
+            return redirect()->route('tasks');
+        }
+        $tasks = Tasks::where('name', 'LIKE', '%' . $request->search . '%')->get();
+        return view('content.tasks', ['tasks'=>$tasks]);
+    }
+
     public function saveNewTask(Request $request){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],

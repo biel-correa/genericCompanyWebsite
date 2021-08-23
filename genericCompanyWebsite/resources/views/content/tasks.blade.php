@@ -18,6 +18,22 @@
 <div class="container">
     <div class="panel">
         <div class="panel-body">
+            <div class="row">
+                {{
+                    Form::open([
+                        'route'=>['task.search'],
+                        'method'=>'POST',
+                        'class'=>'col-md-12'
+                    ])
+                }}
+                <div class="flex">
+                    <input type="text" name="search" placeholder="Search for a task">
+                    <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+                {{
+                    Form::close()
+                }}
+            </div>
             <table class="table">
                 <thead>
                     <td>Id</td>
