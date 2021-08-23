@@ -2,6 +2,9 @@
 @section('content')
 <div class="page-header">
     <h1 class="title">Users</h1>
+    <ol class="breadcrumb">
+        <li class="active">Users</li>
+    </ol>
 </div>
 
 <div class="container d-none" id="add-user-container">
@@ -40,7 +43,7 @@
                         </p>
                     @endif
                 </div>
-                <div class="col-md-12 text-center mt-3">
+                <div class="col-md-12 text-center margin-t-10">
                     <button class="btn btn-primary">Salvar</button>
                 </div>
                 {{

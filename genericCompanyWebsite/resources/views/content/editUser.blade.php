@@ -1,5 +1,12 @@
 @extends('layout')
 @section('content')
+<div class="page-header">
+    <h1 class="title">Users</h1>
+    <ol class="breadcrumb">
+        <li><a href="{{route('users')}}">Users</a></li>
+        <li class="active">Edit users</li>
+    </ol>
+</div>
 <div class="editUser container">
     <div class="panel">
         <div class="panel-body">
@@ -32,7 +39,7 @@
             <p>Created: {{date('d/m/Y H:i', strtotime($user->created_at))}}</p>
             <p>Last Update: {{date('d/m/Y H:i', strtotime($user->updated_at))}}</p>
             <p>ID: {{$user->id}}</p>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center margin-t-10">
                 <button class="btn btn-primary w-25">
                     Save
                 </button>
@@ -55,14 +62,14 @@
                 <label for="user-password">Password:</label>
                 {{ Form::password('password', ['class'=>'form-control', 'id'=>'user-password'])}}
             </div>
-            <div class="errors col-md-12 text-center mt-3">
-                @if($errors->has('password'))
+            @if($errors->has('password'))
+                <div class="errors col-md-12 text-center mt-3">
                     <p class="text-danger">
                         {{ $errors->first('password') }}
                     </p>
-                @endif
-            </div>
-            <div class="col-md-12 text-center">
+                </div>
+            @endif
+            <div class="col-md-12 text-center margin-t-10">
                 <button class="btn btn-danger w-25">
                     Save
                 </button>

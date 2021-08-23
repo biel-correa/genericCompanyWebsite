@@ -2,6 +2,10 @@
 @section('content')
 <div class="page-header">
     <h1 class="title">About {{$task->name}}</h1>
+    <ol class="breadcrumb">
+        <li><a href="{{route('tasks')}}">Tasks</a></li>
+        <li class="active">View task</li>
+    </ol>
 </div>
 <div class="container">
     @if ($task->description)

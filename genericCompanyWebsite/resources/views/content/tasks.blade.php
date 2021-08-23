@@ -3,6 +3,10 @@
 <div class="page-header">
     <h1 class="title">Tasks</h1>
 
+    <ol class="breadcrumb">
+        <li class="active">Tasks</li>
+    </ol>
+
     <!-- Start Page Header Right Div -->
     <div class="right">
         <a class="btn btn-success" onclick="openAddUser()" href="{{ route('task.add') }}"><i class="fa fa-user-plus"></i> ADD</a>

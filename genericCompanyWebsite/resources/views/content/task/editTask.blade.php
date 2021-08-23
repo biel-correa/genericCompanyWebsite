@@ -2,6 +2,10 @@
 @section('content')
 <div class="page-header">
     <h1 class="title">Edit {{$task->name}}</h1>
+    <ol class="breadcrumb">
+        <li><a href="{{route('tasks')}}">Tasks</a></li>
+        <li class="active">Edit task</li>
+    </ol>
 </div>
 <div class="container">
     <div class="panel">
@@ -25,7 +29,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="task-expiration">Expiration date:</label>
-                        {{ Form::date('expiration_date', $task->expiration_date, ['class'=>'form-control']) }} 
+                        {{ Form::date('expiration_date', date('Y-m-d', strtotime($task->expiration_date)), ['class'=>'form-control']) }} 
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -37,11 +41,12 @@
                             <select name="requester_id" id="task-requester" class="form-control">
                                 <option value="">Select a requester</option>
                                 @foreach ($users as $user)
+                                    <option
+                                    value="{{$user->id}}"
                                     @if ($user->id == $task->requester_id)
-                                        <option value="{{$user->id}}" selected>{{$user->name}}</option>    
-                                    @else
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                        selected
                                     @endif
+                                    >{{$user->name}}</option>
                                 @endforeach
                             </select>
                         @endif
@@ -59,11 +64,12 @@
                             <select name="user_assigned_id" id="task-assined" class="form-control">
                                 <option value="">Assign to someone</option>
                                 @foreach ($users as $user)
-                                @if ($user->id == $task->user_assigned_id)
-                                    <option value="{{$user->id}}" selected>{{$user->name}}</option>    
-                                @else
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endif
+                                    <option
+                                    value="{{$user->id}}"
+                                    @if ($user->id == $task->user_assigned_id)
+                                        selected
+                                    @endif
+                                    >{{$user->name}}</option>
                                 @endforeach
                             </select>
                         @endif
@@ -85,7 +91,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center margin-t-10">
                     <button class="btn btn-primary w-25">Save</button>
                 </div>
             {{

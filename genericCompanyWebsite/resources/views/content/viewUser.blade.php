@@ -2,6 +2,10 @@
 @section('content')
 <div class="page-header">
     <h1 class="title">About {{$user->name}}</h1>
+    <ol class="breadcrumb">
+        <li><a href="{{route('users')}}">Users</a></li>
+        <li class="active">Create user</li>
+    </ol>
 </div>
 <div class="container">
     <div class="panel">
