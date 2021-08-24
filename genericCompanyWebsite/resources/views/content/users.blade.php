@@ -50,9 +50,30 @@
                                 Edit
                             </a>
                             @if (count($item->tasksAssined) == 0 && count($item->tasksCreated) == 0)
-                                <a class="btn btn-xs btn-danger" href="{{route('user.deleteUserById', ['id'=>$item->id])}}">
+                                <button class="btn btn-xs btn-danger" id="btn-delete-{{$item->id}}">
                                     Delete
-                                </a>
+                                </button>
+                                <form action="{{route('user.destroy', $item->id)}}" method="post" id="delete-{{$item->id}}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    {{ csrf_field() }}
+                                </form>
+                                <script>
+                                    document.querySelector('#btn-delete-{{$item->id}}').onclick = function () {
+                                        swal({
+                                            title: "Tem certeza?",
+                                            text: "O cadastro será permanentemente excluído!",
+                                            type: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonColor: "#DD6B55",
+                                            confirmButtonText: "Sim",
+                                            cancelButtonText: "Não",
+                                            closeOnConfirm: true
+                                        }, function () {
+                                            event.preventDefault();
+                                            document.getElementById('delete-{{$item->id}}').submit();
+                                        });
+                                    };
+                                </script>
                             @else
                                 <button class="btn btn-xs btn-danger" disabled>
                                     Delete

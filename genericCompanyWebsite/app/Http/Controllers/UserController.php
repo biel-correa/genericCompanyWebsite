@@ -40,7 +40,7 @@ class UserController extends Controller
         return view('content.users.viewUser', ['user'=>$user]);
     }
 
-    public function deleteUserById(int $id){
+    public function destroy(int $id){
         User::find($id)->delete($id);
         return redirect()->route('users');
     }

@@ -33,7 +33,6 @@ Route::resource('user', UserController::class);
 Route::prefix('user')->group(function() {
     Route::post('/search', 'UserController@search')->name('users.search');
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
-    Route::get('/deleteUser/{id}', 'UserController@deleteUserById')->name('user.deleteUserById');
 
     // Route::get('/addUser', 'UserController@addUser')->name('users.addUser');
     // Route::get('/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
