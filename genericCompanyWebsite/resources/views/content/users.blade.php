@@ -43,18 +43,18 @@
                         <td>{{$item->email}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>
-                            <a class="btn btn-success" href="{{route('user.show', ['id'=>$item->id])}}">
+                            <a class="btn btn-xs btn-success" href="{{route('user.show', ['id'=>$item->id])}}">
                                 View
                             </a>
-                            <a class="btn btn-primary" href="{{route('user.edit', ['id'=>$item->id])}}">
+                            <a class="btn btn-xs btn-primary" href="{{route('user.edit', ['id'=>$item->id])}}">
                                 Edit
                             </a>
                             @if (count($item->tasksAssined) == 0 && count($item->tasksCreated) == 0)
-                                <a class="btn btn-danger" href="{{route('user.deleteUserById', ['id'=>$item->id])}}">
+                                <a class="btn btn-xs btn-danger" href="{{route('user.deleteUserById', ['id'=>$item->id])}}">
                                     Delete
                                 </a>
                             @else
-                                <button class="btn btn-danger" disabled>
+                                <button class="btn btn-xs btn-danger" disabled>
                                     Delete
                                 </button>
                             @endif
