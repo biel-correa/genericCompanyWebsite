@@ -11,8 +11,8 @@
     <div class="panel-body">
         {{
             Form::open([
-                'route'=>['task.saveEdit', $task->id],
-                'method'=>'POST',
+                'route'=>['task.update', $task->id],
+                'method'=>'PUT',
                 'class'=>'col-md-12'
             ])
         }}

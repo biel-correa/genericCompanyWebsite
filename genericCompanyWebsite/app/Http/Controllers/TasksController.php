@@ -63,7 +63,7 @@ class TasksController extends Controller
         }
     }
 
-    public function saveEdit(Request $request, $id){
+    public function update(Request $request, $id){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
             'description'=>['max:1000'],
