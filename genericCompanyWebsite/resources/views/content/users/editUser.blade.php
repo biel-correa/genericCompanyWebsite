@@ -12,8 +12,8 @@
         <h1>Details from: {{$user->name}}</h1>
         {{
             Form::open([
-                'route'=>['users.saveUserData', $user->id],
-                'method'=>'POST',
+                'route'=>['user.update', $user->id],
+                'method'=>'PUT',
                 'class'=>'col-md-12'
             ])
         }}

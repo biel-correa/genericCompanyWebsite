@@ -6,7 +6,7 @@
         <div class="row my-3">
             {{
                 Form::open([
-                    'route'=>['users.createNewUser'],
+                    'route'=>['user.store'],
                     'method'=>'POST',
                     'class'=>'col-md-12'
                 ])

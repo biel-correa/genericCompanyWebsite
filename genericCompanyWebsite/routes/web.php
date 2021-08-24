@@ -28,19 +28,18 @@ Route::get('/panels', function () {
 
 Route::get('/users', 'UserController@getUser')->name('users');
 
+Route::resource('user', UserController::class);
+
 Route::prefix('user')->group(function() {
-    Route::get('/addUser', 'UserController@addUser')->name('users.addUser');
-    
-    Route::get('/deleteUser/{id}', 'UserController@deleteUserById')->name('users.deleteUserById');
-    
-    Route::get('/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
-
-    Route::get('/{id}', 'UserController@viewUser')->name('users.view');
-
     Route::post('/search', 'UserController@search')->name('users.search');
-    Route::post('/createNewUser', 'UserController@createNewUser')->name('users.createNewUser');    
-    Route::post('/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
+    Route::get('/deleteUser/{id}', 'UserController@deleteUserById')->name('user.deleteUserById');
+
+    // Route::get('/addUser', 'UserController@addUser')->name('users.addUser');
+    // Route::get('/edit/{id}', 'UserController@editUserById')->name('users.editUserById');
+    // Route::get('/{id}', 'UserController@viewUser')->name('users.view');
+    // Route::post('/createNewUser', 'UserController@createNewUser')->name('users.createNewUser');    
+    // Route::post('/edit/saveUserData/{id}', 'UserController@saveUserData')->name('users.saveUserData');
 });
 
 Route::get('/tasks', 'TasksController@getTasks')->name('tasks');

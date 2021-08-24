@@ -6,7 +6,7 @@
         <li class="active">Users</li>
     </ol>
     <div class="right">
-        <a class="btn btn-success" href="{{ route('users.addUser') }}"><i class="fa fa-user-plus"></i> ADD</a>
+        <a class="btn btn-success" href="{{ route('user.create') }}"><i class="fa fa-user-plus"></i> ADD</a>
     </div>
 </div>
 <div class="panel">
@@ -43,14 +43,14 @@
                         <td>{{$item->email}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>
-                            <a class="btn btn-success" href="{{route('users.view', ['id'=>$item->id])}}">
+                            <a class="btn btn-success" href="{{route('user.show', ['id'=>$item->id])}}">
                                 View
                             </a>
-                            <a class="btn btn-primary" href="{{route('users.editUserById', ['id'=>$item->id])}}">
+                            <a class="btn btn-primary" href="{{route('user.edit', ['id'=>$item->id])}}">
                                 Edit
                             </a>
                             @if (count($item->tasksAssined) == 0 && count($item->tasksCreated) == 0)
-                                <a class="btn btn-danger" href="{{route('users.deleteUserById', ['id'=>$item->id])}}">
+                                <a class="btn btn-danger" href="{{route('user.deleteUserById', ['id'=>$item->id])}}">
                                     Delete
                                 </a>
                             @else

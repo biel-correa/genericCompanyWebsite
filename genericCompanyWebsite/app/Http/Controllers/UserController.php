@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function createNewUser(Request $request){
+    public function store(Request $request){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
             'email'=>['required', 'max:255'],
@@ -26,7 +26,7 @@ class UserController extends Controller
         }
     }
 
-    public function addUser(){
+    public function create(){
         return view('content.users.addUser');
     }
 
@@ -35,7 +35,7 @@ class UserController extends Controller
         return view('content.users', ['users'=>$users]);
     }
 
-    public function viewUser(int $id){
+    public function show(int $id){
         $user = User::find($id);
         return view('content.users.viewUser', ['user'=>$user]);
     }
@@ -53,7 +53,7 @@ class UserController extends Controller
         return view('content.users', ['users'=>$users]);
     }
 
-    public function editUserById(int $id){
+    public function edit(int $id){
         $fullUser = User::find($id);
         if ($fullUser) {
             $user = (object) [
@@ -70,7 +70,7 @@ class UserController extends Controller
         }
     }
 
-    public function saveUserData(Request $request, int $id){
+    public function update(Request $request, int $id){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
             'email'=>['required', 'max:255']

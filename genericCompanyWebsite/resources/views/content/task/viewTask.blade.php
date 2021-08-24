@@ -39,13 +39,13 @@
         <ul>
             <li>
                 Requested by:
-                <a href="{{route('users.view', ['id'=>$task->requester->id])}}">
+                <a href="{{route('user.show', ['id'=>$task->requester->id])}}">
                 {{$task->requester->name}}
                 </a>
             </li>
             <li>
                 Assigned to:
-                <a href="{{route('users.view', ['id'=>$task->assignedTo->id])}}">
+                <a href="{{route('user.show', ['id'=>$task->assignedTo->id])}}">
                 {{$task->assignedTo->name}}
                 </a>
             </li>
