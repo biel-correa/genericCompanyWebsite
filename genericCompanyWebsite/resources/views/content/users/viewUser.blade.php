@@ -36,7 +36,7 @@
                         <td>{{$task->requester->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
                         <td>
-                            <a href="{{route('task.view', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
+                            <a href="{{route('task.show', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
                                 View
                             </a>
                         </td>
@@ -67,7 +67,7 @@
                         <td>{{$task->assignedTo->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
                         <td>
-                            <a href="{{route('task.view', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
+                            <a href="{{route('task.show', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
                                 View
                             </a>
                         </td>

@@ -13,12 +13,12 @@ class TasksController extends Controller
         return view('content.tasks', ['tasks'=>$tasks]);
     }
 
-    public function addTask(){
+    public function create(){
         $users = User::all();
         return view('content.task.addTask', ['users'=>$users]);
     }
     
-    public function view(int $id){
+    public function show(int $id){
         $task = Tasks::find($id);
         return view('content.task.viewTask', ['task'=>$task]);
     }
@@ -29,7 +29,7 @@ class TasksController extends Controller
         return view('content.task.editTask', ['task'=>$task, 'users'=>$users]);
     }
 
-    public function delete(int $id){
+    public function destroy(int $id){
         Tasks::find($id)->delete($id);
         return redirect()->route('tasks');
     }
@@ -42,7 +42,7 @@ class TasksController extends Controller
         return view('content.tasks', ['tasks'=>$tasks]);
     }
 
-    public function saveNewTask(Request $request){
+    public function store(Request $request){
         $validated = $request->validate([
             'name'=>['required', 'max:100'],
             'description'=>['max:1000'],

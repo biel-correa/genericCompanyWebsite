@@ -11,7 +11,7 @@
     <div class="panel-body">
         {{
             Form::open([
-                'route'=>['task.saveNewTask'],
+                'route'=>['task.store'],
                 'method'=>'POST',
                 'class'=>'col-md-12'
             ])
