@@ -19,7 +19,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="task-name">Name: </label>
-                    <input type="text" name="name" class="form-control" id="task-name">
+                    {{ Form::text('name', null,['class'=>'form-control', 'id'=>'user-email', 'placeholder'=>'Set a name'])}}
                     @if($errors->has('name'))
                         <p class="text-danger">
                             {{ $errors->first('name') }}
@@ -72,7 +72,7 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <label for="task-description">Description: </label>
-                    <textarea type="text" name="description" class="form-control" id="task-description" rows="5"></textarea>
+                    {{{ Form::textarea('description', null, ['class'=>'form-control', 'rows'=>5]) }}}
                     @if($errors->has('description'))
                         <p class="text-danger">
                             {{ $errors->first('description') }}

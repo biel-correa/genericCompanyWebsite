@@ -12,7 +12,7 @@
                 ])
             }}
             <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="E-mail" name="email">
+                {{ Form::text('email', null, ['class'=>'form-control', 'placeholder'=>'E-mail']) }}
                 @if($errors->has('email'))
                     <p class="text-danger">
                         {{ $errors->first('email')}}
@@ -20,7 +20,7 @@
                 @endif
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="Name" name="name">
+                {{ Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Name'])}}
                 @if($errors->has('name'))
                     <p class="text-danger">
                         {{ $errors->first('name')}}
@@ -28,7 +28,7 @@
                 @endif
             </div>
             <div class="col-md-4">
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                {{ Form::text('password', null, ['class'=>'form-control', 'placeholder'=>'Password'])}}
                 @if($errors->has('password'))
                     <p class="text-danger">
                         {{ $errors->first('password')}}
