@@ -35,41 +35,22 @@
                 </p>
             @endif
         </div>
+        <div class="form-group">
+            <label for="user-password">Password:</label>
+            {{ Form::password('password', ['class'=>'form-control', 'id'=>'user-password'])}}
+            @if($errors->has('password'))
+                <div class="errors col-md-12 text-center mt-3">
+                    <p class="text-danger">
+                        {{ $errors->first('password') }}
+                    </p>
+                </div>
+            @endif
+        </div>
         <p>Created: {{date('d/m/Y H:i', strtotime($data->created_at))}}</p>
         <p>Last Update: {{date('d/m/Y H:i', strtotime($data->updated_at))}}</p>
         <p>ID: {{$data->id}}</p>
         <div class="col-md-12 text-center margin-t-10">
             <button class="btn btn-primary w-25">
-                Save
-            </button>
-        </div>
-        {{
-            Form::close()
-        }}
-    </div>
-</div>
-
-<div class="panel">
-    <div class="panel-body">
-        <h1>Edit password</h1>
-        {{Form::open([
-            'route'=>['users.updateUserPassword', $data->id],
-            'method'=>'POST',
-            'class'=>'col-md-12'
-        ])}}
-        <div class="form-group">
-            <label for="user-password">Password:</label>
-            {{ Form::password('password', ['class'=>'form-control', 'id'=>'user-password'])}}
-        </div>
-        @if($errors->has('password'))
-            <div class="errors col-md-12 text-center mt-3">
-                <p class="text-danger">
-                    {{ $errors->first('password') }}
-                </p>
-            </div>
-        @endif
-        <div class="col-md-12 text-center margin-t-10">
-            <button class="btn btn-danger w-25">
                 Save
             </button>
         </div>

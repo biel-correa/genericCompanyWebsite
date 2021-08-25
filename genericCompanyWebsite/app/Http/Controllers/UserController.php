@@ -70,35 +70,21 @@ class UserController extends Controller
     }
 
     public function update(Request $request, int $id){
+        
         if (!$data = User::find($id)) {
             return redirect()
-                ->route('users.index')
-                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);
+            ->route('users.index')
+            ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);
         }
-
+        
         $validate = $this->makeRules($request, $data);
         $this->validate($request, $validate['rulesUpdate'], $validate['messages']);
-
-        if ($data->update($request->all())) {
-            return redirect()
-                ->route('users.show', $data->id)
-                ->with('message', ['type' => 'success', 'msg' => 'Cadastro atualizado com sucesso']);
+        
+        if ($request->input('password') != null) {
+            $request['password'] = Hash::make($request->input('password'));
+        } else {
+            $request['password'] = $data->password;
         }
-
-        return redirect()
-                ->route('users.index')
-                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível editar o cadastro.']);
-    }
-
-    public function updateUserPassword(Request $request, int $id){
-        if (!$data = User::find($id)) {
-            return redirect()
-                ->route('users.index')
-                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);
-        }
-
-        $validate = $this->makeRules($request, $data);
-        $this->validate($request, $validate['rulesUpdate'], $validate['messages']);
 
         if ($data->update($request->all())) {
             return redirect()
