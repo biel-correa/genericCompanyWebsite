@@ -28,6 +28,8 @@
 
   @include('layouts.tabpanel')
 
+  <script></script>
+
   <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
 
   <!-- ================================================

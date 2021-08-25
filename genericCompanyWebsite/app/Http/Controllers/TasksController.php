@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class TasksController extends Controller
 {
     public function getTasks(){
-        $tasks = Tasks::all();
-        return view('content.tasks', ['tasks'=>$tasks]);
+        $datas = Tasks::all();
+        return view('content.tasks', ['tasks'=>$datas]);
     }
 
     public function create(){
@@ -19,14 +19,18 @@ class TasksController extends Controller
     }
     
     public function show(int $id){
-        $task = Tasks::find($id);
-        return view('content.task.viewTask', ['task'=>$task]);
+        $data = Tasks::find($id);
+        return view('content.task.viewTask', ['task'=>$data]);
     }
 
     public function edit(int $id){
-        $task=Tasks::find($id);
+        if (!$data = Tasks::find($id)) {
+            return redirect()
+                ->route('tasks.index')
+                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível efetuar o cadastro.']);
+        }
         $users=User::all();
-        return view('content.task.editTask', ['task'=>$task, 'users'=>$users]);
+        return view('content.task.editTask', compact('data', 'users'));
     }
 
     public function destroy(int $id){
@@ -38,8 +42,8 @@ class TasksController extends Controller
         if ($request->search == "") {
             return redirect()->route('tasks');
         }
-        $tasks = Tasks::where('name', 'LIKE', '%' . $request->search . '%')->get();
-        return view('content.tasks', ['tasks'=>$tasks]);
+        $datas = Tasks::where('name', 'LIKE', '%' . $request->search . '%')->get();
+        return view('content.tasks', ['tasks'=>$datas]);
     }
 
     public function store(Request $request){
@@ -64,27 +68,58 @@ class TasksController extends Controller
     }
 
     public function update(Request $request, $id){
-        $validated = $request->validate([
-            'name'=>['required', 'max:100'],
-            'description'=>['max:1000'],
-            'requester_id'=>['required'],
-            'user_assigned_id'=>['required']
-        ]);
-        if ($validated) {
-            $task = Tasks::find($id);
-            if ($task) {
-                $task->name=$request->input('name');
-                $task->description=$request->input('description');
-                $task->requester_id=$request->input('requester_id');
-                $task->user_assigned_id=$request->input('user_assigned_id');
-                $task->expiration_date=$request->input('expiration_date');
-                $task->save();
-                return redirect()->route('tasks');
-            } else {
-                return redirect()->route('task.add');
-            }
-        } else {
-            return redirect()->route('task.edit', ['id'=>$id])->withErrors($validated);
+        if (!$data = Tasks::find($id)) {
+            return redirect()
+                ->route('tasks.index')
+                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);
         }
+
+        $validate = $this->makeRules($request, $data);
+        $this->validate($request, $validate['rulesUpdate'], $validate['messages']);
+
+        if ($data->update($request->all())) {
+            return redirect()
+                ->route('tasks.view', $data->id)
+                ->with('message', ['type' => 'success', 'msg' => 'Cadastro atualizado com sucesso']);
+        }
+
+        return redirect()
+                ->route('tasks.index')
+                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível editar o cadastro.']);
+    }
+
+    public function makeRules(Request $request, $data = null){
+        $messages = [
+            'name.required' => 'Por favor informe o nome.',
+            'name.min' => 'Nome inválido, mínimo de 3 caracteres',
+            'name.max' => 'Nome inválido, máximo de 100 caracteres',
+            'name.unique' => 'Nome inválido, este nome já existe',
+
+            'description.min' => 'Descrição inválida, mínimo de 3 caracteres',
+            'description.max' => 'Descrição inválida, máximo de 1000 caracteres',
+            
+            'requester_id.required' => 'Por favor informe o solicitante.',
+            
+            'user_assigned_id.required' => 'Por favor informe o encarregado.'
+        ];
+
+        $rules = [
+            'name' => 'required|min:3|max:100|unique:users,name,NULL,id',
+            'description' => 'nullable|min:3|max:1000',
+            'requester_id' => 'required',
+            'user_assigned_id' => 'required'
+        ];
+
+        $rulesUpdate = $rules;
+
+        if ($data) {
+            $rulesUpdate['name'] = 'required|min:3|max:100|unique:users,name,' . $data->id . ',id';
+        }
+
+        return [
+            'messages' => $messages,
+            'rules' => $rules,
+            'rulesUpdate' => $rulesUpdate 
+        ];
     }
 }
