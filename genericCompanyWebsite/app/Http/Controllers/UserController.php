@@ -49,8 +49,15 @@ class UserController extends Controller
     }
 
     public function destroy(int $id){
-        User::find($id)->delete($id);
-        return redirect()->route('users');
+        $data = User::find($id);
+        if ($data->tasksCreated->count() && $data->tasksAssined->count()) {
+            return redirect()
+            ->route('users.index')
+            ->with('message', ['type' => 'danger', 'msg' => 'Esse usuário esta registrado em uma ou mais tarefas.']);
+        }
+        
+        $data->delete();
+        return redirect()->route('users.index');
     }
 
     public function search(Request $request) {
