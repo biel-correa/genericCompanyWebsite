@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 class TasksController extends Controller
 {
     public function getTasks(){
-        $datas = Tasks::all();
-        return view('content.tasks', ['tasks'=>$datas]);
+        $data = Tasks::all();
+        return view('content.tasks', ['tasks'=>$data]);
     }
 
     public function create(){
         $users = User::all();
-        return view('content.task.addTask', ['users'=>$users]);
+        return view('content.task.addTask', compact('users'));
     }
     
     public function show(int $id){
@@ -29,6 +29,7 @@ class TasksController extends Controller
                 ->route('tasks.index')
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível efetuar o cadastro.']);
         }
+
         $users=User::all();
         return view('content.task.editTask', compact('data', 'users'));
     }
@@ -42,29 +43,26 @@ class TasksController extends Controller
         if ($request->search == "") {
             return redirect()->route('tasks');
         }
-        $datas = Tasks::where('name', 'LIKE', '%' . $request->search . '%')->get();
-        return view('content.tasks', ['tasks'=>$datas]);
+        $data = Tasks::where('name', 'LIKE', '%' . $request->search . '%')->get();
+        return view('content.tasks', ['tasks'=>$data]);
     }
 
     public function store(Request $request){
-        $validated = $request->validate([
-            'name'=>['required', 'max:100'],
-            'description'=>['max:1000'],
-            'requester_id'=>['required'],
-            'user_assigned_id'=>['required']
-        ]);
-        if ($validated) {
-            Tasks::create([
-                'name'=>$request->input('name'),
-                'description'=>$request->input('description'),
-                'requester_id'=>$request->input('requester_id'),
-                'user_assigned_id'=>$request->input('user_assigned_id'),
-                'expiration_date'=>$request->input('expiration_date')
-            ]);
-            return redirect()->route('tasks');
-        }else{
-            return redirect()->route('content.task.addTask')->withErrors($validated);
+
+        $validate = $this->makeRules($request);
+        $this->validate($request, $validate['rulesUpdate'], $validate['messages']);
+
+        $data = Tasks::create($request->all());
+
+        if ($data) {
+            return redirect()
+                ->route('task.show', $data->id)
+                ->with('message', ['type' => 'success', 'msg' => 'Cadastro criado com sucesso']);
         }
+
+        return redirect()
+                ->route('tasks.index')
+                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível criar o cadastro.']);
     }
 
     public function update(Request $request, $id){
@@ -79,7 +77,7 @@ class TasksController extends Controller
 
         if ($data->update($request->all())) {
             return redirect()
-                ->route('tasks.view', $data->id)
+                ->route('task.show', $data->id)
                 ->with('message', ['type' => 'success', 'msg' => 'Cadastro atualizado com sucesso']);
         }
 
