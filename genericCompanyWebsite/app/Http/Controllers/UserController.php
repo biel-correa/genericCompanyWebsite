@@ -73,7 +73,7 @@ class UserController extends Controller
     public function update(Request $request, int $id){
         if (!$data = User::find($id)) {
             return redirect()
-                ->route('tasks.index')
+                ->route('user.index')
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);
         }
 
@@ -92,22 +92,24 @@ class UserController extends Controller
     }
 
     public function updateUserPassword(Request $request, int $id){
-        $validated = $request->validate([
-            'password'=>['required', 'max:256']
-        ]);
-        if ($validated) {
-            $data = User::find($id);
-            if ($data) {
-                $data->password=Hash::make($request->input('password'));
-                $data->save();
-                return redirect()->route('users');
-            }
-            else{
-                return redirect()->route('users.editUserById', ['id'=>$id]);
-            }
-        } else {
-            return redirect()->route('users.editUserById', ['id'=>$id])->withErrors($validated);
+        if (!$data = User::find($id)) {
+            return redirect()
+                ->route('user.index')
+                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);
         }
+
+        $validate = $this->makeRulesUpdatePassword($request, $data);
+        $this->validate($request, $validate['rulesUpdate'], $validate['messages']);
+
+        if ($data->update($request->all())) {
+            return redirect()
+                ->route('user.show', $data->id)
+                ->with('message', ['type' => 'success', 'msg' => 'Cadastro atualizado com sucesso']);
+        }
+
+        return redirect()
+                ->route('user.index')
+                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível editar o cadastro.']);
     }
 
     public function makeRulesUpdateUser(Request $request, $data = null){
@@ -133,6 +135,30 @@ class UserController extends Controller
         if ($data) {
             $rulesUpdate['name'] = 'required|min:3|max:100|unique:users,name,' . $data->id . ',id';
             $rulesUpdate['email'] = 'required|min:3|max:255|unique:users,email,' . $data->id . ',id';
+        }
+
+        return [
+            'messages' => $messages,
+            'rules' => $rules,
+            'rulesUpdate' => $rulesUpdate 
+        ];
+    }
+
+    public function makeRulesUpdatePassword(Request $request, $data = null){
+        $messages = [
+            'password.required' => 'Por favor informe a senha.',
+            'password.min' => 'Senha inválida, mínimo de 3 caracteres',
+            'password.max' => 'Senha inválidoa, máximo de 256 caracteres'
+        ];
+
+        $rules = [
+            'password' => 'required|min:3|max:256',
+        ];
+
+        $rulesUpdate = $rules;
+
+        if ($data) {
+            $rulesUpdate['password'] = 'required|min:3|max:256';
         }
 
         return [
