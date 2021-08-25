@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('content.dashboard');
+    return redirect()->route('users');
 })->name('home');
 
 Route::get('/mailbox', function () {
