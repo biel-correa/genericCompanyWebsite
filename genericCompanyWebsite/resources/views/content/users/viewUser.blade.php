@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 <div class="page-header">
-    <h1 class="title">About {{$user->name}}</h1>
+    <h1 class="title">About {{$data->name}}</h1>
     <ol class="breadcrumb">
         <li><a href="{{route('users')}}">Users</a></li>
         <li class="active">Create user</li>
@@ -11,9 +11,9 @@
     <div class="panel-body">
         <h1>User info</h1>
         <ul>
-            <li>Name: {{$user->name}}</li>
-            <li>E-mail: {{$user->email}}</li>
-            <li>Created at: {{date('d/m/Y H:i', strtotime($user->created_at))}}</li>
+            <li>Name: {{$data->name}}</li>
+            <li>E-mail: {{$data->email}}</li>
+            <li>Created at: {{date('d/m/Y H:i', strtotime($data->created_at))}}</li>
         </ul>
     </div>
 </div>
@@ -29,7 +29,7 @@
                 <td>Actions</td>
             </thead>
             <tbody>
-                @forelse ($user->tasksAssined as $task)
+                @forelse ($data->tasksAssined as $task)
                     <tr>
                         <td>{{$task->id}}</td>
                         <td>{{strlen($task->name) > 50 ? substr($task->name,0,50)."..." : $task->name}}</td>
@@ -60,7 +60,7 @@
                 <td>Actions</td>
             </thead>
             <tbody>
-                @forelse ($user->tasksCreated as $task)
+                @forelse ($data->tasksCreated as $task)
                     <tr>
                         <td>{{$task->id}}</td>
                         <td>{{strlen($task->name) > 50 ? substr($task->name,0,50)."..." : $task->name}}</td>
