@@ -6,7 +6,7 @@
         <li class="active">Users</li>
     </ol>
     <div class="right">
-        <a class="btn btn-success" href="{{ route('user.create') }}"><i class="fa fa-user-plus"></i> ADD</a>
+        <a class="btn btn-success" href="{{ route('users.create') }}"><i class="fa fa-user-plus"></i> ADD</a>
     </div>
 </div>
 <div class="panel">
@@ -36,24 +36,24 @@
                 <td>Actions</td>
             </thead>
             <tbody>
-                @forelse  ($users as $item)
+                @forelse  ($data as $item)
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                         <td>
-                            <a class="btn btn-xs btn-success" href="{{route('user.show', ['id'=>$item->id])}}">
+                            <a class="btn btn-xs btn-success" href="{{route('users.show', $item->id)}}">
                                 View
                             </a>
-                            <a class="btn btn-xs btn-primary" href="{{route('user.edit', ['id'=>$item->id])}}">
+                            <a class="btn btn-xs btn-primary" href="{{route('users.edit', $item->id)}}">
                                 Edit
                             </a>
                             @if (count($item->tasksAssined) == 0 && count($item->tasksCreated) == 0)
                                 <button class="btn btn-xs btn-danger" id="btn-delete-{{$item->id}}">
                                     Delete
                                 </button>
-                                <form action="{{route('user.destroy', $item->id)}}" method="post" id="delete-{{$item->id}}">
+                                <form action="{{route('users.destroy', $item->id)}}" method="post" id="delete-{{$item->id}}">
                                     <input type="hidden" name="_method" value="DELETE">
                                     {{ csrf_field() }}
                                 </form>

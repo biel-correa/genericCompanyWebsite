@@ -9,7 +9,7 @@
 
     <!-- Start Page Header Right Div -->
     <div class="right">
-        <a class="btn btn-success" onclick="openAddUser()" href="{{ route('task.create') }}"><i class="fa fa-user-plus"></i> ADD</a>
+        <a class="btn btn-success" onclick="openAddUser()" href="{{ route('tasks.create') }}"><i class="fa fa-user-plus"></i> ADD</a>
     </div>
     <!-- End Page Header Right Div -->
 
@@ -20,7 +20,7 @@
         <div class="row">
             {{
                 Form::open([
-                    'route'=>['task.search'],
+                    'route'=>['tasks.search'],
                     'method'=>'POST',
                     'class'=>'col-md-12'
                 ])
@@ -42,17 +42,17 @@
                 <td>Actions</td>
             </thead>
             <tbody>
-                @forelse ($tasks as $item)
+                @forelse ($data as $item)
                 <tr>
                     <td>{{$item->id}}</td>
                     <td>{{strlen($item->name) > 50 ? substr($item->name,0,50)."..." : $item->name}}</td>
                     <td>{{$item->assignedTo->name}}</td>
                     <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
                     <td>
-                        <a class="btn btn-xs btn-success" href="{{route('task.show', ['id'=>$item->id])}}">View</a>
-                        <a class="btn btn-xs btn-primary" href="{{route('task.edit', ['id'=>$item->id])}}">Edit</a>
-                        <button id="btn-delete-{{$item->id}}" class="btn btn-xs btn-danger" href="{{route('task.destroy', ['id'=>$item->id])}}">Delete</button>
-                        <form action="{{route('task.destroy', $item->id)}}" method="post" id="delete-{{$item->id}}">
+                        <a class="btn btn-xs btn-success" href="{{route('tasks.show', ['id'=>$item->id])}}">View</a>
+                        <a class="btn btn-xs btn-primary" href="{{route('tasks.edit', ['id'=>$item->id])}}">Edit</a>
+                        <button id="btn-delete-{{$item->id}}" class="btn btn-xs btn-danger" href="{{route('tasks.destroy', ['id'=>$item->id])}}">Delete</button>
+                        <form action="{{route('tasks.destroy', $item->id)}}" method="post" id="delete-{{$item->id}}">
                             <input type="hidden" name="_method" value="DELETE">
                             {{ csrf_field() }}
                         </form>

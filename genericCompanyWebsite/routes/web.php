@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->route('users');
+    return redirect()->route('users.index');
 })->name('home');
 
 Route::get('/mailbox', function () {
@@ -26,19 +26,15 @@ Route::get('/panels', function () {
     return view('content.uiElements.panels');
 })->name('panels');
 
-Route::get('/users', 'UserController@getUser')->name('users');
+Route::resource('users', UserController::class);
 
-Route::resource('user', UserController::class);
-
-Route::prefix('user')->group(function() {
+Route::prefix('users')->group(function() {
     Route::post('/search', 'UserController@search')->name('users.search');
     Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
 });
 
-Route::get('/tasks', 'TasksController@getTasks')->name('tasks');
+Route::resource('tasks', TasksController::class);
 
-Route::resource('task', TasksController::class);
-
-Route::prefix('/task')->group(function() {
-    Route::post('/search', 'TasksController@search')->name('task.search');
+Route::prefix('/tasks')->group(function() {
+    Route::post('/search', 'TasksController@search')->name('tasks.search');
 });

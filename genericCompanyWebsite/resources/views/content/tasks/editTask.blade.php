@@ -3,7 +3,7 @@
 <div class="page-header">
     <h1 class="title">Edit {{$data->name}}</h1>
     <ol class="breadcrumb">
-        <li><a href="{{route('tasks')}}">Tasks</a></li>
+        <li><a href="{{route('tasks.index')}}">Tasks</a></li>
         <li class="active">Edit task</li>
     </ol>
 </div>
@@ -11,7 +11,7 @@
     <div class="panel-body">
         {{
             Form::open([
-                'route'=>['task.update', $data->id],
+                'route'=>['tasks.update', $data->id],
                 'method'=>'PUT',
                 'class'=>'col-md-12'
             ])

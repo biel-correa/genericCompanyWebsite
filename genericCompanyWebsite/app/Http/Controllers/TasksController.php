@@ -8,19 +8,19 @@ use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
-    public function getTasks(){
+    public function index(){
         $data = Tasks::all();
-        return view('content.tasks', ['tasks'=>$data]);
+        return view('content.tasks', compact('data'));
     }
 
     public function create(){
         $users = User::all();
-        return view('content.task.addTask', compact('users'));
+        return view('content.tasks.addTask', compact('users'));
     }
     
     public function show(int $id){
         $data = Tasks::find($id);
-        return view('content.task.viewTask', ['task'=>$data]);
+        return view('content.tasks.viewTask', compact('data'));
     }
 
     public function edit(int $id){
@@ -31,7 +31,7 @@ class TasksController extends Controller
         }
 
         $users=User::all();
-        return view('content.task.editTask', compact('data', 'users'));
+        return view('content.tasks.editTask', compact('data', 'users'));
     }
 
     public function destroy(int $id){
@@ -41,10 +41,10 @@ class TasksController extends Controller
 
     public function search(Request $request) {
         if ($request->search == "") {
-            return redirect()->route('tasks');
+            return redirect()->route('tasks.index');
         }
         $data = Tasks::where('name', 'LIKE', '%' . $request->search . '%')->get();
-        return view('content.tasks', ['tasks'=>$data]);
+        return view('content.tasks', compact('data'));
     }
 
     public function store(Request $request){
@@ -52,11 +52,9 @@ class TasksController extends Controller
         $validate = $this->makeRules($request);
         $this->validate($request, $validate['rulesUpdate'], $validate['messages']);
 
-        $data = Tasks::create($request->all());
-
-        if ($data) {
+        if ($data = Tasks::create($request->all())) {
             return redirect()
-                ->route('task.show', $data->id)
+                ->route('tasks.show', $data->id)
                 ->with('message', ['type' => 'success', 'msg' => 'Cadastro criado com sucesso']);
         }
 
@@ -77,7 +75,7 @@ class TasksController extends Controller
 
         if ($data->update($request->all())) {
             return redirect()
-                ->route('task.show', $data->id)
+                ->route('tasks.show', $data->id)
                 ->with('message', ['type' => 'success', 'msg' => 'Cadastro atualizado com sucesso']);
         }
 

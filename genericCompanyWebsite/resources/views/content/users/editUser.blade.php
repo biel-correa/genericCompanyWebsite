@@ -3,23 +3,23 @@
 <div class="page-header">
     <h1 class="title">Users</h1>
     <ol class="breadcrumb">
-        <li><a href="{{route('users')}}">Users</a></li>
+        <li><a href="{{route('users.index')}}">Users</a></li>
         <li class="active">Edit users</li>
     </ol>
 </div>
 <div class="panel">
     <div class="panel-body">
-        <h1>Details from: {{$user->name}}</h1>
+        <h1>Details from: {{$data->name}}</h1>
         {{
             Form::open([
-                'route'=>['user.update', $user->id],
+                'route'=>['users.update', $data->id],
                 'method'=>'PUT',
                 'class'=>'col-md-12'
             ])
         }}
         <div class="form-group">
             <label for="user-name">Name:</label>
-            {{ Form::text('name', $user->name, ['class'=>'form-control', 'id'=>'user-name'])}}
+            {{ Form::text('name', $data->name, ['class'=>'form-control', 'id'=>'user-name'])}}
             @if($errors->has('name'))
                 <p class="text-danger">
                     {{ $errors->first('name') }}
@@ -28,16 +28,16 @@
         </div>
         <div class="form-group">
             <label for="user-email">E-mail:</label>
-            {{ Form::text('email', $user->email, ['class'=>'form-control', 'id'=>'user-email'])}}
+            {{ Form::text('email', $data->email, ['class'=>'form-control', 'id'=>'user-email'])}}
             @if($errors->has('email'))
                 <p class="text-danger">
                     {{ $errors->first('email') }}
                 </p>
             @endif
         </div>
-        <p>Created: {{date('d/m/Y H:i', strtotime($user->created_at))}}</p>
-        <p>Last Update: {{date('d/m/Y H:i', strtotime($user->updated_at))}}</p>
-        <p>ID: {{$user->id}}</p>
+        <p>Created: {{date('d/m/Y H:i', strtotime($data->created_at))}}</p>
+        <p>Last Update: {{date('d/m/Y H:i', strtotime($data->updated_at))}}</p>
+        <p>ID: {{$data->id}}</p>
         <div class="col-md-12 text-center margin-t-10">
             <button class="btn btn-primary w-25">
                 Save
@@ -53,7 +53,7 @@
     <div class="panel-body">
         <h1>Edit password</h1>
         {{Form::open([
-            'route'=>['users.updateUserPassword', $user->id],
+            'route'=>['users.updateUserPassword', $data->id],
             'method'=>'POST',
             'class'=>'col-md-12'
         ])}}

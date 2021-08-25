@@ -3,7 +3,7 @@
 <div class="page-header">
     <h1 class="title">About {{$data->name}}</h1>
     <ol class="breadcrumb">
-        <li><a href="{{route('users')}}">Users</a></li>
+        <li><a href="{{route('users.index')}}">Users</a></li>
         <li class="active">Create user</li>
     </ol>
 </div>
@@ -36,7 +36,7 @@
                         <td>{{$task->requester->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
                         <td>
-                            <a href="{{route('task.show', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
+                            <a href="{{route('tasks.show', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
                                 View
                             </a>
                         </td>
@@ -67,7 +67,7 @@
                         <td>{{$task->assignedTo->name}}</td>
                         <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
                         <td>
-                            <a href="{{route('task.show', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
+                            <a href="{{route('tasks.show', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
                                 View
                             </a>
                         </td>
