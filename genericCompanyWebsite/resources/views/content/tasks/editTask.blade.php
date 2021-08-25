@@ -10,7 +10,7 @@
 <div class="panel">
     <div class="panel-body">
         {{
-            Form::open([
+            Form::model($data, [
                 'route'=>['tasks.update', $data->id],
                 'method'=>'PUT',
                 'class'=>'col-md-12'

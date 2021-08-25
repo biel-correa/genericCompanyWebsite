@@ -11,7 +11,7 @@
     <div class="panel-body">
         <h1>Details from: {{$data->name}}</h1>
         {{
-            Form::open([
+            Form::model($data, [
                 'route'=>['users.update', $data->id],
                 'method'=>'PUT',
                 'class'=>'col-md-12'
