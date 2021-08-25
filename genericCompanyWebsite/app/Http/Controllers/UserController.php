@@ -9,21 +9,23 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function store(Request $request){
-        $validated = $request->validate([
-            'name'=>['required', 'max:100'],
-            'email'=>['required', 'max:255'],
-            'password'=>['required', 'max:256']
-        ]);
-        if ($validated) {
-            User::create([
-                'name'=>$request->input('name'),
-                'email'=>$request->input('email'),
-                'password'=>Hash::make($request->input('password')),
-            ]);
-            return redirect()->route('users');
-        } else {
-            return redirect()->route('users')->withErrors($validated);
+        
+        $validate = $this->makeRules($request);
+        $this->validate($request, $validate['rulesUpdate'], $validate['messages']);
+        
+        $request['password'] = Hash::make($request->input('password'));
+        
+        $data = User::create($request->all());
+
+        if ($data) {
+            return redirect()
+                ->route('user.show', $data->id)
+                ->with('message', ['type' => 'success', 'msg' => 'Cadastro criado com sucesso']);
         }
+
+        return redirect()
+                ->route('user.index')
+                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível criar o cadastro.']);
     }
 
     public function create(){
@@ -110,6 +112,44 @@ class UserController extends Controller
         return redirect()
                 ->route('user.index')
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível editar o cadastro.']);
+    }
+
+    public function makeRules(Request $request, $data = null){
+        $messages = [
+            'name.required' => 'Por favor informe o nome.',
+            'name.min' => 'Nome inválido, mínimo de 3 caracteres',
+            'name.max' => 'Nome inválido, máximo de 100 caracteres',
+            'name.unique' => 'Nome inválido, este nome já existe',
+
+            'email.required' => 'Por favor informe o e-mail.',
+            'email.min' => 'E-mail inválido, mínimo de 3 caracteres',
+            'email.max' => 'E-mail inválido, máximo de 255 caracteres',
+            'email.unique' => 'E-mail inválido, este e-mail já existe',
+
+            'password.required' => 'Por favor informe a senha.',
+            'password.min' => 'Senha inválida, mínimo de 3 caracteres',
+            'password.max' => 'Senha inválidoa, máximo de 256 caracteres'
+        ];
+
+        $rules = [
+            'name' => 'required|min:3|max:100|unique:users,name,NULL,id',
+            'email' => 'required|min:3|max:255|unique:users,email,NULL,id',
+            'password' => 'required|min:3|max:256',
+        ];
+
+        $rulesUpdate = $rules;
+
+        if ($data) {
+            $rulesUpdate['name'] = 'required|min:3|max:100|unique:users,name,' . $data->id . ',id';
+            $rulesUpdate['email'] = 'required|min:3|max:255|unique:users,email,' . $data->id . ',id';
+            $rulesUpdate['password'] = 'required|min:3|max:256';
+        }
+
+        return [
+            'messages' => $messages,
+            'rules' => $rules,
+            'rulesUpdate' => $rulesUpdate 
+        ];
     }
 
     public function makeRulesUpdateUser(Request $request, $data = null){

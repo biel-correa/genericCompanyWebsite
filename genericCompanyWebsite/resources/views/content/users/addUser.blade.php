@@ -28,7 +28,7 @@
                 @endif
             </div>
             <div class="col-md-4">
-                {{ Form::text('password', null, ['class'=>'form-control', 'placeholder'=>'Password'])}}
+                {{ Form::password('password', ['class'=>'form-control', 'placeholder'=>'Password'])}}
                 @if($errors->has('password'))
                     <p class="text-danger">
                         {{ $errors->first('password')}}
