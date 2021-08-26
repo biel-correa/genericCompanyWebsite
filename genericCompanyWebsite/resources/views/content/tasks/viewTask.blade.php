@@ -6,6 +6,9 @@
         <li><a href="{{route('tasks.index')}}">Tasks</a></li>
         <li class="active">View task</li>
     </ol>
+    <div class="right">
+        <a class="btn btn-primary" href="{{ route('tasks.edit', $data->id) }}"><i class="fa fa-pencil"></i> Edit</a>
+    </div>
 </div>
 @if ($data->description)
     <div class="panel">

@@ -6,6 +6,9 @@
         <li><a href="{{route('users.index')}}">Users</a></li>
         <li class="active">Create user</li>
     </ol>
+    <div class="right">
+        <a class="btn btn-primary" href="{{ route('users.edit', $data->id) }}"><i class="fa fa-pencil"></i> Edit</a>
+    </div>
 </div>
 <div class="panel">
     <div class="panel-body">
