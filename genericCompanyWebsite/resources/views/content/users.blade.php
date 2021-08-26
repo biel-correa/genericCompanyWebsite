@@ -19,9 +19,9 @@
                     'class'=>'col-md-12'
                 ])
             }}
-            <div class="flex">
+            <div class="d-flex">
                 <input type="text" name="search" placeholder="Search by name">
-                <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i></button>
+                <button class="btn btn-primary margin-l-10" type="submit"><i class="fa fa-search"></i></button>
             </div>
             {{
                 Form::close()

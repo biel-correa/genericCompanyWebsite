@@ -13,6 +13,12 @@
 
   <link href="{{ asset('css/root.css') }}" rel="stylesheet">
 
+  <style>
+    .d-flex{
+      display: flex;
+    }
+  </style>
+
 
 </head>
 
