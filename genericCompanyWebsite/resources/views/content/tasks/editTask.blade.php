@@ -37,7 +37,7 @@
                     @if (count($users) < 1)
                     <h1>No users where found</h1>
                     @else
-                        <select name="requester_id" id="task-requester" class="form-control">
+                        <select name="requester_id" id="task-requester" class="form-control select2">
                             <option value="">Select a requester</option>
                             @foreach ($users as $user)
                                 <option
@@ -60,7 +60,7 @@
                     @if (count($users) < 1)
                         <h1>No users where found</h1>
                     @else
-                        <select name="user_assigned_id" id="task-assined" class="form-control">
+                        <select name="user_assigned_id" id="task-assined" class="form-control select2">
                             <option value="">Assign to someone</option>
                             @foreach ($users as $user)
                                 <option
