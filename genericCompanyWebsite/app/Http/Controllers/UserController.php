@@ -132,6 +132,70 @@ class UserController extends Controller
         );
     }
 
+    public function taskrequested(Request $request, int $id) {
+        // DB table to use
+        $table = Tasks::getModel()->getTable();
+        
+        // Table's primary key
+        $primaryKey = Tasks::getModel()->getKeyName();
+        
+        // Array of database columns which should be read and sent back to DataTables.
+        // The `db` parameter represents the column name in the database, while the `dt`
+        // parameter represents the DataTables column identifier. In this case simple
+        // indexes
+        $columns = array(
+            array( 'db' => 'id', 'dt' => 0 ),
+            array(
+                'db' => 'name',
+                'dt' => 1,
+                'formatter' => function ($d, $row) {
+                    return strlen($d) > 50 ? substr($d,0,50)."..." : $d;
+            }),
+            array(
+                'db' => 'user_assigned_id',
+                'dt' => 2,
+                'formatter' => function($d, $row) {
+                    return User::find($d)->name;
+                }
+            ),
+            array(
+                'db'        => 'created_at',
+                'dt'        => 3,
+                'formatter' => function( $d, $row ) {
+                    return date( 'j/m/Y', strtotime($d));
+                }
+            ),
+            array(
+                'db'        => 'id',
+                'dt'        => 4,
+                'formatter' => function( $d, $row ) {
+                    return view('content.users.assignedActions', compact('d'))->render();;
+                }
+            ),
+
+        );
+        
+        // SQL server connection information
+        $sql_details = array(
+            'user' => 'homestead',
+            'pass' => 'secret',
+            'db'   => 'company-db',
+            'host' => '127.0.0.1'
+        );
+        
+        
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        * If you just want to use the basic configuration for DataTables with PHP
+        * server-side, there is no need to edit below this line.
+        */
+
+        $where = 'requester_id = ' . $id;
+        
+        echo json_encode(
+            SSP::complex( $request, $sql_details, $table, $primaryKey, $columns, null, $where)
+        );
+    }
+
     public function store(Request $request){
         
         $validate = $this->makeRules($request);

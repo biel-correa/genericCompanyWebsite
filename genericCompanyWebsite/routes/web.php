@@ -43,6 +43,7 @@ Route::prefix('/ajax')->group(function() {
     Route::get('/users', 'UserController@ajax')->name('ajax.users');
     Route::prefix('/user')->group(function () {
         Route::get('/taskassined/{id}', 'UserController@taskassined')->name('ajax.users.taskassined');
+        Route::get('/taskrequested/{id}', 'UserController@taskrequested')->name('ajax.users.taskrequested');
     });
     Route::get('/tasks', 'TasksController@ajax')->name('ajax.tasks');
 });
