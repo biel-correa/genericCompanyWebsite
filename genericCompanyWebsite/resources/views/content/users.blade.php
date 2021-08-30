@@ -11,81 +11,31 @@
 </div>
 <div class="panel">
     <div class="panel-body table-responsive">
-        <div class="row">
-            {{
-                Form::open([
-                    'route'=>['users.search'],
-                    'method'=>'POST',
-                    'class'=>'col-md-12'
-                ])
-            }}
-            <div class="d-flex">
-                <input type="text" name="search" placeholder="Search by name">
-                <button class="btn btn-primary margin-l-10" type="submit"><i class="fa fa-search"></i></button>
-            </div>
-            {{
-                Form::close()
-            }}
-        </div>
-        <table class="table">
+        <table class="table" id="table-users">
             <thead>
-                <td>ID</td>
-                <td>Name</td>
-                <td>E-mail</td>
-                <td>Creation Date</td>
-                <td>Actions</td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Creation Date</th>
+                <th></th>
             </thead>
-            <tbody>
-                @forelse  ($data as $item)
-                    <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{date('d/m/Y H:i', strtotime($item->created_at))}}</td>
-                        <td>
-                            <a class="btn btn-xs btn-success" href="{{route('users.show', $item->id)}}">
-                                View
-                            </a>
-                            <a class="btn btn-xs btn-primary" href="{{route('users.edit', $item->id)}}">
-                                Edit
-                            </a>
-                            @if (count($item->tasksAssined) == 0 && count($item->tasksCreated) == 0)
-                                <button class="btn btn-xs btn-danger" id="btn-delete-{{$item->id}}">
-                                    Delete
-                                </button>
-                                <form action="{{route('users.destroy', $item->id)}}" method="post" id="delete-{{$item->id}}">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    {{ csrf_field() }}
-                                </form>
-                                <script>
-                                    document.querySelector('#btn-delete-{{$item->id}}').onclick = function () {
-                                        swal({
-                                            title: "Tem certeza?",
-                                            text: "O cadastro será permanentemente excluído!",
-                                            type: "warning",
-                                            showCancelButton: true,
-                                            confirmButtonColor: "#DD6B55",
-                                            confirmButtonText: "Sim",
-                                            cancelButtonText: "Não",
-                                            closeOnConfirm: true
-                                        }, function () {
-                                            event.preventDefault();
-                                            document.getElementById('delete-{{$item->id}}').submit();
-                                        });
-                                    };
-                                </script>
-                            @else
-                                <button class="btn btn-xs btn-danger" disabled>
-                                    Delete
-                                </button>
-                            @endif
-                        </td>
-                    </tr>
-                @empty
-                <h1>Couldn't find any user</h1>
-                @endforelse
-            </tbody>
+            <tfoot>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Creation Date</th>
+                <th></th>
+            </tfoot>
         </table>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#table-users').DataTable( {
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{route('ajax.users')}}"
+            } );
+        } );
+    </script>
 </div>
 @endsection

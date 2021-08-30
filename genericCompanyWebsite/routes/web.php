@@ -38,3 +38,7 @@ Route::resource('tasks', TasksController::class);
 Route::prefix('/tasks')->group(function() {
     Route::post('/search', 'TasksController@search')->name('tasks.search');
 });
+
+Route::prefix('/ajax')->group(function() {
+    Route::get('/users', 'UserController@ajax')->name('ajax.users');
+});
