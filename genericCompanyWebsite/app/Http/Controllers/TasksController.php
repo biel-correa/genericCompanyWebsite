@@ -74,7 +74,7 @@ class TasksController extends Controller
 
     public function index(){
         $data = Tasks::all();
-        return view('content.tasks', compact('data'));
+        return view('content.tasks.index', compact('data'));
     }
 
     public function create(){

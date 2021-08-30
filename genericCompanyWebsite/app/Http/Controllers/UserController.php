@@ -228,7 +228,7 @@ class UserController extends Controller
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar nenhum cadastro.']);
         }
 
-        return view('content.users', compact('data'));
+        return view('content.users.index', compact('data'));
     }
 
     public function show(int $id){
