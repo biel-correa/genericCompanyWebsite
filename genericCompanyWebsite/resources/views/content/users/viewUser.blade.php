@@ -21,9 +21,9 @@
     </div>
 </div>
 <div class="panel">
-    <div class="panel-body">
-        <h1>Tasks assined</h1>
-        <table class="table">
+    <div class="panel-body table-responsive">
+        <h1>Tasks assigned</h1>
+        <table class="table" id="table-assigned">
             <thead>
                 <td>Id</td>
                 <td>Task</td>
@@ -31,25 +31,24 @@
                 <td>Created at</td>
                 <td>Actions</td>
             </thead>
-            <tbody>
-                @forelse ($data->tasksAssined as $task)
-                    <tr>
-                        <td>{{$task->id}}</td>
-                        <td>{{strlen($task->name) > 50 ? substr($task->name,0,50)."..." : $task->name}}</td>
-                        <td>{{$task->requester->name}}</td>
-                        <td>{{date('d/m/Y H:i', strtotime($task->created_at))}}</td>
-                        <td>
-                            <a href="{{route('tasks.show', ['id'=>$task->id])}}" class="btn btn-xs btn-success">
-                                View
-                            </a>
-                        </td>
-                    </tr>
-                @empty
-                    <h1>No tasks were assigned</h1>
-                @endforelse
-            </tbody>
+            <tfoot>
+                <td>Id</td>
+                <td>Task</td>
+                <td>Creator</td>
+                <td>Created at</td>
+                <td>Actions</td>
+            </tfoot>
         </table>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#table-assigned').DataTable( {
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{route('ajax.users.taskassined', $data->id)}}"
+            } );
+        } );
+    </script>
 </div>
 <div class="panel">
     <div class="panel-body">

@@ -1,0 +1,1 @@
+<a href="{{route('tasks.show', ['id'=>$d])}}" class="btn btn-xs btn-success">View</a>
