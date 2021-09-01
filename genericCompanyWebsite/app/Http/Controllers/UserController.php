@@ -21,6 +21,7 @@ class UserController extends Controller
         return DataTables::of($data)
         ->addColumn('action', function($row){
             $d = $row['id'];
+            $canDelete = true;
             $user = User::find($d);
             if (count($user->tasksAssined)) {
                 $canDelete = false;
