@@ -17,14 +17,14 @@
                 <th>Name</th>
                 <th>E-mail</th>
                 <th>Creation Date</th>
-                <th></th>
+                <th>Action</th>
             </thead>
             <tfoot>
                 <th>ID</th>
                 <th>Name</th>
                 <th>E-mail</th>
                 <th>Creation Date</th>
-                <th></th>
+                <th>Action</th>
             </tfoot>
         </table>
     </div>
@@ -33,7 +33,14 @@
             $('#table-users').DataTable( {
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{route('ajax.users')}}"
+                "ajax": "{{route('ajax.users')}}",
+                "columns": [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
             } );
         } );
     </script>
