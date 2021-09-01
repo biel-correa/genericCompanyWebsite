@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="{{route('tasks.index')}}">
+            <a href="{{route('roles.index')}}">
                 <span class="icon color7">
                     <i class="fa fa-tag"></i>
                 </span>

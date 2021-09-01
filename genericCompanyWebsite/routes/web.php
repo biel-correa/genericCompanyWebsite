@@ -29,4 +29,5 @@ Route::prefix('/ajax')->group(function() {
         Route::get('/taskrequested/{id}', 'UserController@taskrequested')->name('ajax.users.taskrequested');
     });
     Route::get('/tasks', 'TasksController@ajax')->name('ajax.tasks');
+    Route::get('/roles', 'RoleController@ajax')->name('ajax.roles');
 });
