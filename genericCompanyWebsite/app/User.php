@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -34,5 +34,9 @@ class User extends Authenticatable
 
     public function tasksAssined() {
         return $this->hasMany(Tasks::class, 'user_assigned_id', 'id');
+    }
+
+    public function role() {
+        return $this->hasMany(Role::class, 'id', 'role_id');
     }
 }

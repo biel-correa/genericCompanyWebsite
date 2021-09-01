@@ -46,6 +46,29 @@
                 </div>
             @endif
         </div>
+        <div class="form-group">
+            <label for="user-role">Role</label>
+            @if (count($roles) < 1)
+            <h1>No roles where found</h1>
+            @else
+                <select name="role_id" id="task-requester" class="form-control select2">
+                    <option value="">Select a requester</option>
+                    @foreach ($roles as $role)
+                        <option
+                        value="{{$role->id}}"
+                        @if ($role->id == $data->role_id)
+                            selected
+                        @endif
+                        >{{$role->name}}</option>
+                    @endforeach
+                </select>
+            @endif
+            @if($errors->has('role_id'))
+                <p class="text-danger">
+                    {{ $errors->first('role_id') }}
+                </p>
+            @endif
+        </div>
         <p>Created: {{date('d/m/Y H:i', strtotime($data->created_at))}}</p>
         <p>Last Update: {{date('d/m/Y H:i', strtotime($data->updated_at))}}</p>
         <p>ID: {{$data->id}}</p>

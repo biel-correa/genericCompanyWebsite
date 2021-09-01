@@ -7,6 +7,7 @@ use App\Tasks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Libraries\SSP;
+use App\Role;
 use DataTables;
 
 class UserController extends Controller
@@ -223,9 +224,9 @@ class UserController extends Controller
 
     public function edit(int $id){
         if ($data = User::find($id)) {
-            return view('content.users.editUser', compact('data'));
+            $roles = Role::all();
+            return view('content.users.editUser', compact('data', 'roles'));
         }
-        
         return redirect()->route('users.index');
     }
 
@@ -271,13 +272,16 @@ class UserController extends Controller
 
             'password.required' => 'Por favor informe a senha.',
             'password.min' => 'Senha inválida, mínimo de 3 caracteres',
-            'password.max' => 'Senha inválidoa, máximo de 256 caracteres'
+            'password.max' => 'Senha inválidoa, máximo de 256 caracteres',
+
+            'role_id.required' => 'Por favor informe o cargo.',
         ];
 
         $rules = [
             'name' => 'required|min:3|max:100|unique:users,name,NULL,id',
             'email' => 'required|min:3|max:255|unique:users,email,NULL,id',
             'password' => 'nullable|min:3|max:256',
+            'role_id' => 'required'
         ];
 
         $rulesUpdate = $rules;
