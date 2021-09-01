@@ -13,11 +13,29 @@ use DataTables;
 class UserController extends Controller
 {
     function ajax(Request $request){
-        $data = User::latest()->get()->map(function($item) {
-            $newData = $item->only(['id', 'name', 'email', 'created_at']);
-            $newData['created_at'] = $newData['created_at']->format('d/m/Y');
-            return $newData;
-        });
+        if ($request->input('filter_role')) {
+            $data = User::latest()->where('role_id', '=', $request->input('filter_role'))->get()->map(function($item) {
+                $newData = $item->only(['id', 'name', 'email', 'created_at', 'role_id']);
+                $newData['created_at'] = $newData['created_at']->format('d/m/Y');
+                if ($newData['role_id']) {
+                    $newData['role'] = Role::find($newData['role_id'])->name;
+                } else {
+                    $newData['role'] = 'Indefinido';
+                }
+                return $newData;
+            });    
+        } else {
+            $data = User::latest()->get()->map(function($item) {
+                $newData = $item->only(['id', 'name', 'email', 'created_at', 'role_id']);
+                $newData['created_at'] = $newData['created_at']->format('d/m/Y');
+                if ($newData['role_id']) {
+                    $newData['role'] = Role::find($newData['role_id'])->name;
+                } else {
+                    $newData['role'] = 'Indefinido';
+                }
+                return $newData;
+            });
+        }
         return DataTables::of($data)
         ->addColumn('action', function($row){
             $d = $row['id'];
@@ -192,11 +210,11 @@ class UserController extends Controller
         $data = User::all();
         if (!count($data)) {
             return redirect()
-                ->route('users.index')
-                ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar nenhum cadastro.']);
+            ->route('users.index')
+            ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar nenhum cadastro.']);
         }
-
-        return view('content.users.index', compact('data'));
+        $roles = Role::all();
+        return view('content.users.index', compact('data', 'roles'));
     }
 
     public function show(int $id){
