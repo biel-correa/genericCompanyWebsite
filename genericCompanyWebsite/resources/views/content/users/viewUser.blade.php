@@ -16,6 +16,11 @@
         <ul>
             <li>Name: {{$data->name}}</li>
             <li>E-mail: {{$data->email}}</li>
+            @if ($data->role)
+                <li>Role: {{$data->role->name}}</li>
+            @else
+                <li>Role: Not defined. <a href="{{route('users.edit', $data->id)}}">Add one</a></li>
+            @endif
             <li>Created at: {{date('d/m/Y H:i', strtotime($data->created_at))}}</li>
         </ul>
     </div>

@@ -11,29 +11,50 @@
                     'class'=>'col-md-12'
                 ])
             }}
-            <div class="col-md-4">
-                {{ Form::text('email', null, ['class'=>'form-control', 'placeholder'=>'E-mail']) }}
-                @if($errors->has('email'))
-                    <p class="text-danger">
-                        {{ $errors->first('email')}}
-                    </p>
-                @endif
+            <div class="row margin-b-15">
+                <div class="col-md-6">
+                    {{ Form::text('email', null, ['class'=>'form-control', 'placeholder'=>'E-mail']) }}
+                    @if($errors->has('email'))
+                        <p class="text-danger">
+                            {{ $errors->first('email')}}
+                        </p>
+                    @endif
+                </div>
+                <div class="col-md-6">
+                    {{ Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Name'])}}
+                    @if($errors->has('name'))
+                        <p class="text-danger">
+                            {{ $errors->first('name')}}
+                        </p>
+                    @endif
+                </div>
             </div>
-            <div class="col-md-4">
-                {{ Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Name'])}}
-                @if($errors->has('name'))
-                    <p class="text-danger">
-                        {{ $errors->first('name')}}
-                    </p>
-                @endif
-            </div>
-            <div class="col-md-4">
-                {{ Form::password('password', ['class'=>'form-control', 'placeholder'=>'Password'])}}
-                @if($errors->has('password'))
-                    <p class="text-danger">
-                        {{ $errors->first('password')}}
-                    </p>
-                @endif
+            <div class="row margin-b-15">
+                <div class="col-md-6">
+                    {{ Form::password('password', ['class'=>'form-control', 'placeholder'=>'Password'])}}
+                    @if($errors->has('password'))
+                        <p class="text-danger">
+                            {{ $errors->first('password')}}
+                        </p>
+                    @endif
+                </div>
+                <div class="col-md-6">
+                    @if (count($roles) < 1)
+                    <h1>No roles where found</h1>
+                    @else
+                        <select name="role_id" id="task-requester" class="form-control select2">
+                            <option value="">Select a role</option>
+                            @foreach ($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                    @if($errors->has('role_id'))
+                        <p class="text-danger">
+                            {{ $errors->first('role_id') }}
+                        </p>
+                    @endif
+                </div>
             </div>
             <div class="col-md-12 text-center margin-t-10">
                 <button class="btn btn-primary">Salvar</button>

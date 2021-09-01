@@ -184,7 +184,8 @@ class UserController extends Controller
     }
 
     public function create(){
-        return view('content.users.addUser');
+        $roles = Role::all();
+        return view('content.users.addUser', compact('roles'));
     }
 
     public function index(){

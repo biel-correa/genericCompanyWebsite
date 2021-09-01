@@ -52,7 +52,7 @@
             <h1>No roles where found</h1>
             @else
                 <select name="role_id" id="task-requester" class="form-control select2">
-                    <option value="">Select a requester</option>
+                    <option value="">Select a role</option>
                     @foreach ($roles as $role)
                         <option
                         value="{{$role->id}}"
