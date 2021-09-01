@@ -24,6 +24,17 @@
                 </span>
             </a>
         </li>
+        <li>
+            <a href="{{route('tasks.index')}}">
+                <span class="icon color7">
+                    <i class="fa fa-tag"></i>
+                </span>
+                Roles
+                <span class="label label-default">
+                    {{ App\Role::all()->count() }}
+                </span>
+            </a>
+        </li>
     </ul>
 
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RolesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,8 @@ Route::resource('tasks', TasksController::class);
 Route::prefix('/tasks')->group(function() {
     Route::post('/search', 'TasksController@search')->name('tasks.search');
 });
+
+Route::resource('roles', RoleController::class);
 
 Route::prefix('/ajax')->group(function() {
     Route::get('/users', 'UserController@ajax')->name('ajax.users');
