@@ -13,29 +13,18 @@ use DataTables;
 class UserController extends Controller
 {
     function ajax(Request $request){
-        if ($request->input('filter_role')) {
-            $data = User::latest()->where('role_id', '=', $request->input('filter_role'))->get()->map(function($item) {
-                $newData = $item->only(['id', 'name', 'email', 'created_at', 'role_id']);
-                $newData['created_at'] = $newData['created_at']->format('d/m/Y');
-                if ($newData['role_id']) {
-                    $newData['role'] = Role::find($newData['role_id'])->name;
-                } else {
-                    $newData['role'] = 'Indefinido';
+        $data = User::join('roles', 'users.role_id', '=', 'roles.id')
+        ->select('users.id', 'users.name', 'users.email', 'users.created_at', 'roles.name as role_name');
+        
+        if ($request->has('filters')) {
+            foreach ($request['filters'] as $key => $value) {
+                if ($value) {
+                    $data = $data->where($key, '=', $value);
                 }
-                return $newData;
-            });    
-        } else {
-            $data = User::latest()->get()->map(function($item) {
-                $newData = $item->only(['id', 'name', 'email', 'created_at', 'role_id']);
-                $newData['created_at'] = $newData['created_at']->format('d/m/Y');
-                if ($newData['role_id']) {
-                    $newData['role'] = Role::find($newData['role_id'])->name;
-                } else {
-                    $newData['role'] = 'Indefinido';
-                }
-                return $newData;
-            });
+            }
         }
+
+        $data = $data->get();
         return DataTables::of($data)
         ->addColumn('action', function($row){
             $d = $row['id'];
@@ -46,7 +35,7 @@ class UserController extends Controller
             } elseif (count($user->tasksCreated)) {
                 $canDelete = false;
             }
-            $actionBtn = view('content.users.actions', compact('d', 'canDelete'))->render();;
+            $actionBtn = view('content.users.actions', compact('d', 'canDelete'))->render();
             return $actionBtn;
         })
         ->rawColumns(['action'])

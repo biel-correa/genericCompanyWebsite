@@ -73,10 +73,10 @@
         } );
 
         function fillTable(filter_role = null) {
-            data = {}
-            if (filter_role) {
-                data["filter_role"] = filter_role
-                console.log(data)
+            let data = {
+                "filters" : {
+                    "users.role_id" : filter_role
+                }
             }
             $('#table-users').DataTable( {
                 "processing": true,
@@ -90,7 +90,7 @@
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
-                    {data: 'role', name: 'role'},
+                    {data: 'role_name', name: 'role_name'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
