@@ -32,14 +32,12 @@
             <thead>
                 <td>Id</td>
                 <td>Task</td>
-                <td>Creator</td>
                 <td>Created at</td>
                 <td>Actions</td>
             </thead>
             <tfoot>
                 <td>Id</td>
                 <td>Task</td>
-                <td>Creator</td>
                 <td>Created at</td>
                 <td>Actions</td>
             </tfoot>
@@ -50,7 +48,13 @@
             $('#table-assigned').DataTable( {
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{route('ajax.users.taskassined', $data->id)}}"
+                "ajax": "{{route('ajax.users.taskassined', $data->id)}}",
+                "columns": [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
             } );
         } );
     </script>
@@ -62,14 +66,12 @@
             <thead>
                 <td>Id</td>
                 <td>Name</td>
-                <td>Assigned</td>
                 <td>Created at</td>
                 <td>Actions</td>
             </thead>
             <tfoot>
                 <td>Id</td>
                 <td>Name</td>
-                <td>Assigned</td>
                 <td>Created at</td>
                 <td>Actions</td>
             </tfoot>
@@ -80,7 +82,13 @@
             $('#table-requested').DataTable( {
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{route('ajax.users.taskrequested', $data->id)}}"
+                "ajax": "{{route('ajax.users.taskrequested', $data->id)}}",
+                "columns": [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
             } );
         } );
     </script>
