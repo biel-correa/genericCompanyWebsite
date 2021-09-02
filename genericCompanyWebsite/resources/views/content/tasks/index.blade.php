@@ -39,7 +39,14 @@
             $('#table-tasks').DataTable( {
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{route('ajax.tasks')}}"
+                "ajax": "{{route('ajax.tasks')}}",
+                "columns": [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'assign_to', name: 'assign_to'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
             } );
         } );
     </script>
