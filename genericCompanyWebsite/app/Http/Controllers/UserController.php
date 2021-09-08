@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\Hash;
 use App\Libraries\SSP;
 use App\Role;
 use DataTables;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     function ajax(Request $request){
         $data = User::join('roles', 'users.role_id', '=', 'roles.id')
-        ->select('users.id', 'users.name', 'users.email', 'users.created_at', 'roles.name as role_name');
+        ->select('users.id', 'users.name', 'users.email', DB::raw("DATE_FORMAT(users.created_at, '%d/%m/%Y') as createdAt"), 'roles.name as role_name');
         
         if ($request->has('filters')) {
             foreach ($request['filters'] as $key => $value) {

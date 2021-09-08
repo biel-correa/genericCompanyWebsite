@@ -91,7 +91,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'role_name', name: 'role_name'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'createdAt', name: 'createdAt'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             } );

@@ -23,7 +23,11 @@
       width: 100% !important;
     }
   </style>
+    <!-- ================================================
+  jQuery UI
+  ================================================ -->
   <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/jquery-ui/jquery-ui.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
@@ -151,10 +155,6 @@ Gmaps
   <!-- demo codes -->
   <script src="{{asset('js/gmaps/gmaps-plugin.js')}}"></script>
 
-  <!-- ================================================
-jQuery UI
-================================================ -->
-  <script type="text/javascript" src="{{asset('js/jquery-ui/jquery-ui.min.js')}}"></script>
 
   <!-- ================================================
 Moment.js
