@@ -5,27 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
-use App\Libraries\SSP;
-use DataTables;
 
 class RoleController extends Controller
 {
-    public function ajax(Request $request) {
-        $data = Role::latest()->get()->map(function($item) {
-            $newData = $item->only(['id', 'name', 'created_at']);
-            $newData['created_at'] = $newData['created_at']->format('d/m/Y');
-            return $newData;
-        });
-        return DataTables::of($data)
-        ->addColumn('action', function($row){
-            $d = $row['id'];
-            $actionBtn = view('content.roles.actions', compact('d'))->render();;
-            return $actionBtn;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
-    }
-
     public function index(){
         $data = Role::all();
         return view('content.roles.index', compact('data'));

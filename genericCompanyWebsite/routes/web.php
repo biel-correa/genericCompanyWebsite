@@ -23,11 +23,11 @@ Route::prefix('/tasks')->group(function() {
 Route::resource('roles', RoleController::class);
 
 Route::prefix('/ajax')->group(function() {
-    Route::get('/users', 'UserController@ajax')->name('ajax.users');
+    Route::get('/users', 'AjaxController@listUsers')->name('ajax.users');
     Route::prefix('/user')->group(function () {
-        Route::get('/taskassined/{id}', 'UserController@taskassined')->name('ajax.users.taskassined');
-        Route::get('/taskrequested/{id}', 'UserController@taskrequested')->name('ajax.users.taskrequested');
+        Route::get('/taskassined/{id}', 'AjaxController@taskassined')->name('ajax.users.taskassined');
+        Route::get('/taskrequested/{id}', 'AjaxController@taskrequested')->name('ajax.users.taskrequested');
     });
-    Route::get('/tasks', 'TasksController@ajax')->name('ajax.tasks');
-    Route::get('/roles', 'RoleController@ajax')->name('ajax.roles');
+    Route::get('/tasks', 'AjaxController@listTasks')->name('ajax.tasks');
+    Route::get('/roles', 'AjaxController@listRoles')->name('ajax.roles');
 });

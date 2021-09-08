@@ -5,26 +5,9 @@ namespace App\Http\Controllers;
 use App\Tasks;
 use App\User;
 use Illuminate\Http\Request;
-use App\Libraries\SSP;
-use DataTables;
 
 class TasksController extends Controller
 {
-
-    public function ajax(Request $request) {
-        $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'users.name as assign_to', 'tasks.created_at')->get();
-
-        return DataTables::of($data)
-        ->addColumn('action', function($row){
-            $d = $row['id'];
-            $actionBtn = view('content.tasks.actions', compact('d'))->render();;
-            return $actionBtn;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
-    }
-
     public function index(){
         $data = Tasks::all();
         return view('content.tasks.index', compact('data'));
