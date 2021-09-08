@@ -23,7 +23,7 @@ class AjaxController extends Controller
             }
         }
 
-        $data = $data->get();
+        $data = $data->limit(100)->get();
         return DataTables::of($data)
         ->addColumn('action', function($row){
             $d = $row['id'];
@@ -43,7 +43,7 @@ class AjaxController extends Controller
 
     public function taskassined(Request $request, int $id) {
         $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'tasks.created_at')->get();
+        ->select('tasks.id', 'tasks.name', 'tasks.created_at')->limit(100)->get();
         
         return DataTables::of($data)
         ->addColumn('action', function($row){
@@ -57,7 +57,7 @@ class AjaxController extends Controller
 
     public function taskrequested(Request $request, int $id) {
         $data = Tasks::join('users', 'tasks.requester_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'tasks.created_at')->get();
+        ->select('tasks.id', 'tasks.name', 'tasks.created_at')->limit(100)->get();
         
         return DataTables::of($data)
         ->addColumn('action', function($row){
@@ -71,7 +71,7 @@ class AjaxController extends Controller
 
     public function listTasks(Request $request) {
         $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'users.name as assign_to', 'tasks.created_at')->get();
+        ->select('tasks.id', 'tasks.name', 'users.name as assign_to', 'tasks.created_at')->limit(100)->get();
 
         return DataTables::of($data)
         ->addColumn('action', function($row){
@@ -84,7 +84,7 @@ class AjaxController extends Controller
     }
 
     public function listRoles(Request $request) {
-        $data = Role::latest()->get()->map(function($item) {
+        $data = Role::latest()->limit(100)->get()->map(function($item) {
             $newData = $item->only(['id', 'name', 'created_at']);
             $newData['created_at'] = $newData['created_at']->format('d/m/Y');
             return $newData;
