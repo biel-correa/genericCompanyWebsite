@@ -14,7 +14,7 @@ class TasksController extends Controller
     }
 
     public function create(){
-        $users = User::all();
+        $users = User::pluck('name', 'id');
         return view('content.tasks.addTask', compact('users'));
     }
     
@@ -30,7 +30,7 @@ class TasksController extends Controller
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível efetuar o cadastro.']);
         }
 
-        $users=User::all();
+        $users = User::pluck('name', 'id');
         return view('content.tasks.editTask', compact('data', 'users'));
     }
 

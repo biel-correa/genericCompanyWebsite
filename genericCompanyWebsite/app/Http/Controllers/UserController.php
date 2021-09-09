@@ -30,7 +30,7 @@ class UserController extends Controller
     }
 
     public function create(){
-        $roles = Role::all();
+        $roles = Role::pluck('name', 'id');
         return view('content.users.addUser', compact('roles'));
     }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
 
     public function edit(int $id){
         if ($data = User::find($id)) {
-            $roles = Role::all();
+            $roles = Role::pluck('name', 'id');
             return view('content.users.editUser', compact('data', 'roles'));
         }
         return redirect()->route('users.index');

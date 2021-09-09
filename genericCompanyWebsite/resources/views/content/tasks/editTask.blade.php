@@ -37,17 +37,7 @@
                     @if (count($users) < 1)
                     <h1>No users where found</h1>
                     @else
-                        <select name="requester_id" id="task-requester" class="form-control select2">
-                            <option value="">Select a requester</option>
-                            @foreach ($users as $user)
-                                <option
-                                value="{{$user->id}}"
-                                @if ($user->id == $data->requester_id)
-                                    selected
-                                @endif
-                                >{{$user->name}}</option>
-                            @endforeach
-                        </select>
+                        {{ Form::select('requester_id', $users, old('task-requester'), ['placeholder' => 'Select a requester', 'id' => 'task-requester', 'class' => 'form-control  select2'])}}
                     @endif
                     @if($errors->has('requester_id'))
                         <p class="text-danger">
@@ -60,17 +50,7 @@
                     @if (count($users) < 1)
                         <h1>No users where found</h1>
                     @else
-                        <select name="user_assigned_id" id="task-assined" class="form-control select2">
-                            <option value="">Assign to someone</option>
-                            @foreach ($users as $user)
-                                <option
-                                value="{{$user->id}}"
-                                @if ($user->id == $data->user_assigned_id)
-                                    selected
-                                @endif
-                                >{{$user->name}}</option>
-                            @endforeach
-                        </select>
+                        {{ Form::select('user_assigned_id', $users, old('task-assined'), ['placeholder' => 'Assign to someone', 'id' => 'task-assined', 'class' => 'form-control select2'])}}
                     @endif
                     @if($errors->has('user_assigned_id'))
                         <p class="text-danger">

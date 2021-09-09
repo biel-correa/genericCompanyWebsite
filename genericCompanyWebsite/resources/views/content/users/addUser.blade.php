@@ -42,12 +42,7 @@
                     @if (count($roles) < 1)
                     <h1>No roles where found</h1>
                     @else
-                        <select name="role_id" id="task-requester" class="form-control select2">
-                            <option value="">Select a role</option>
-                            @foreach ($roles as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
+                        {{ Form::select('role_id', $roles, old('role_id'), ['placeholder' => 'Select a role', 'id' => 'task-requester', 'class' => 'form-control select2'])}}
                     @endif
                     @if($errors->has('role_id'))
                         <p class="text-danger">

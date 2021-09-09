@@ -30,7 +30,7 @@ class AjaxController extends Controller
             $whereFilter[] = [$key, $operator, $value];
         }
 
-        $data = User::select(['users.*', 'roles.name as role_name'])
+        $data = User::select(['users.*', DB::raw('DATE_FORMAT(users.created_at, "%d/%m/%Y %H:%i") as formarted_created_at'), 'roles.name as role_name'])
             ->leftJoin('roles', 'roles.id', '=', 'users.role_id')
             ->where($whereFilter)
             ->limit(100);
