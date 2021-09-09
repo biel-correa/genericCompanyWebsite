@@ -14,8 +14,17 @@
         <div class="margin-b-20">
             <button class="btn btn-primary" id="filter-toggle">Show Filters</button>
             <div class="hide" id="filters">
-                <label for="">Role</label>
-                {{ Form::select('role_id', $roles, old('role_id'), ['placeholder' => 'Select a role', 'id' => 'role_id', 'onchange' => 'refreshTableUsers();']) }}
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="role_id">Role</label>
+                        {{ Form::select('role_id', $roles, old('role_id'), ['placeholder' => 'Select a role', 'id' => 'role_id', 'onchange' => 'refreshTableUsers();', 'class' => 'form-control select2']) }}
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Data de criação inicial</label>
+                        {{ Form::date('min_created_at', Carbon\Carbon::now()->subYears(10)->format('Y-m-d'), ['placeholder' => 'Select a date', 'id' => 'min_created_at', 'onchange' => 'refreshTableUsers();', 'class' => 'form-control']) }}
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -78,6 +87,10 @@
                                 'role_id': {
                                     'operator': $('#role_id').val() == "" ? '!=' : '=',
                                     'value': $('#role_id').val()
+                                },
+                                'created_at': {
+                                    'operator': '>',
+                                    'value': $('#min_created_at').val()
                                 }
                             }
                         })
