@@ -35,14 +35,8 @@ class UserController extends Controller
     }
 
     public function index(){
-        $data = User::all();
-        if (!count($data)) {
-            return redirect()
-            ->route('users.index')
-            ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar nenhum cadastro.']);
-        }
-        $roles = Role::all();
-        return view('content.users.index', compact('data', 'roles'));
+        $roles = Role::pluck('name', 'id');
+        return view('content.users.index', compact('roles'));
     }
 
     public function show(int $id){

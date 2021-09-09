@@ -8,37 +8,38 @@ use App\Tasks;
 use App\Role;
 use DataTables;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Contracts\DataTable;
 
 class AjaxController extends Controller
 {
     public function listUsers(Request $request){
-        $data = User::join('roles', 'users.role_id', '=', 'roles.id')
-        ->select('users.id', 'users.name', 'users.email', DB::raw("DATE_FORMAT(users.created_at, '%d/%m/%Y') as createdAt"), 'roles.name as role_name');
-        
-        if ($request->has('filters')) {
-            foreach ($request['filters'] as $key => $value) {
-                if ($value) {
-                    $data = $data->where($key, '=', $value);
+        $filter_request = $request['filter'] ?? [];
+        $whereFilter = [];
+
+        foreach ($filter_request as $key => $filter) {
+            $operator = (array_key_exists('operator', $filter) ? $filter['operator'] : null);
+            $value = (array_key_exists('value', $filter) ? $filter['value'] : null);
+
+            if ((strlen(trim($operator)) > 0) && (strlen(trim($value)) > 0)) {
+                switch ($key) {
+                    default:
+                        $key = 'users.' . $key;
                 }
             }
+
+            $whereFilter[] = [$key, $operator, $value];
         }
 
-        $data = $data->limit(100)->get();
-        return DataTables::of($data)
-        ->addColumn('action', function($row){
-            $d = $row['id'];
-            $canDelete = true;
-            $user = User::find($d);
-            if (count($user->tasksAssined)) {
-                $canDelete = false;
-            } elseif (count($user->tasksCreated)) {
-                $canDelete = false;
-            }
-            $actionBtn = view('content.users.actions', compact('d', 'canDelete'))->render();
-            return $actionBtn;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+        $data = User::select(['users.*', 'roles.name as role_name'])
+            ->leftJoin('roles', 'roles.id', '=', 'users.role_id')
+            ->where($whereFilter)
+            ->limit(100);
+        
+        $dataTable = DataTables::of($data)
+            ->addColumn('action', 'content.users.actions')
+            ->make(true);
+
+        return $dataTable;
     }
 
     public function taskassined(Request $request, int $id) {

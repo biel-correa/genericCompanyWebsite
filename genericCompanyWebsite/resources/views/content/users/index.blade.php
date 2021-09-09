@@ -14,21 +14,8 @@
         <div class="margin-b-20">
             <button class="btn btn-primary" id="filter-toggle">Show Filters</button>
             <div class="hide" id="filters">
-                <label for="">Cargo</label>
-                @if (count($roles) < 1)
-                <h1>No roles where found</h1>
-                @else
-                    <select name="role_id" id="role_id" class="form-control select2">
-                        <option value="">Select a role</option>
-                        @foreach ($roles as $role)
-                            <option
-                            value="{{$role->id}}">{{$role->name}}</option>
-                        @endforeach
-                    </select>
-                @endif
-                <div class="row text-center margin-t-20">
-                    <button class="btn btn-success" id="filter-submit">Apply</button>
-                </div>
+                <label for="">Role</label>
+                {{ Form::select('role_id', $roles, old('role_id'), ['placeholder' => 'Select a role', 'id' => 'role_id', 'onchange' => 'refreshTableUsers();']) }}
             </div>
         </div>
         <div class="table-responsive">
@@ -53,9 +40,15 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            fillTable()
+        var urlUsersDefault = '{{ route('ajax.users') }}'
+        var tableUsers;
 
+        function refreshTableUsers() {
+            tableUsers.ajax.url(urlUsersDefault)
+            tableUsers.draw();
+        }
+
+        $(document).ready(function() {
             $('#filter-toggle').click(function() {
                 if($('#filters').hasClass('hide')) {
                     $('#filter-toggle').html('Hide Filters')
@@ -66,36 +59,41 @@
                 }
             })
 
-            $('#filter-submit').click(function() {
-                $('#table-users').DataTable().destroy()
-                fillTable($('#role_id').val())
+            tableUsers = $('#table-users').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.10.13/i18n/Portuguese-Brasil.json'
+                },
+                searchDelay: 2500,
+                processing: true,
+                serverSide: true,
+                autoWidth: false,
+                paging: true,
+                order: [0, 'desc'],
+                ajax: {
+                    url: urlUsersDefault,
+                    type: 'GET',
+                    data: function(d) {
+                        return $.extend({}, d, {
+                            'filter': {
+                                'role_id': {
+                                    'operator': $('#role_id').val() == "" ? '!=' : '=',
+                                    'value': $('#role_id').val()
+                                }
+                            }
+                        })
+                    }
+                },
+                fixedColumns: true,
+                columns: [
+                    {data: 'id'},
+                    {data: 'name'},
+                    {data: 'email'},
+                    {data: 'role_name', name: 'role.name'},
+                    {data: 'created_at'},
+                    {data: 'action', searchable: false},
+                ]
             })
         } );
-
-        function fillTable(filter_role = null) {
-            let data = {
-                "filters" : {
-                    "users.role_id" : filter_role
-                }
-            }
-            $('#table-users').DataTable( {
-                "processing": true,
-                "serverSide": true,
-                "ajax": {
-                    url: "{{route('ajax.users')}}",
-                    type: "GET",
-                    data: data
-                },
-                "columns": [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'role_name', name: 'role_name'},
-                    {data: 'createdAt', name: 'createdAt'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
-            } );
-        }
     </script>
 </div>
 @endsection
