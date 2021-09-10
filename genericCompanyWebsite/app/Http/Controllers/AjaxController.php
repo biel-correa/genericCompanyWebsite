@@ -19,9 +19,13 @@ class AjaxController extends Controller
         foreach ($filter_request as $key => $filter) {
             $operator = (array_key_exists('operator', $filter) ? $filter['operator'] : null);
             $value = (array_key_exists('value', $filter) ? $filter['value'] : null);
-
-            if ((strlen(trim($operator)) > 0) && (strlen(trim($value)) > 0)) {
+            
+            if ((strlen(trim($operator)) > 0)) {
                 switch ($key) {
+                    case 'role_id':
+                        if ($value == null) {
+                            $operator = '!=';
+                        }
                     default:
                         $key = 'users.' . $key;
                 }

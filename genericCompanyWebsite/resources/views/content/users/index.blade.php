@@ -85,7 +85,7 @@
                         return $.extend({}, d, {
                             'filter': {
                                 'role_id': {
-                                    'operator': $('#role_id').val() == "" ? '!=' : '=',
+                                    'operator': '=',
                                     'value': $('#role_id').val()
                                 },
                                 'created_at': {
