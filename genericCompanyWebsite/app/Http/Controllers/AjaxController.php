@@ -75,15 +75,30 @@ class AjaxController extends Controller
     }
 
     public function listTasks(Request $request) {
-        $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'users.name as assign_to', 'tasks.created_at')->limit(100)->get();
+        $filter_request = $request['filter'] ?? [];
+        $whereFilter = [];
 
+        foreach ($filter_request as $key => $filter) {
+            $operator = (array_key_exists('operator', $filter) ? $filter['operator'] : null);
+            $value = (array_key_exists('value', $filter) ? $filter['value'] : null);
+            
+            if ((strlen(trim($operator)) > 0)) {
+                switch ($key) {
+                    default:
+                        $key = 'users.' . $key;
+                }
+            }
+
+            $whereFilter[] = [$key, $operator, $value];
+        }
+        
+        $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
+        ->select('tasks.id', 'tasks.name', 'users.name as assign_to', DB::raw('DATE_FORMAT(tasks.created_at, "%d/%m/%Y %H:%i") as formarted_created_at'))
+        ->where($whereFilter)
+        ->limit(100);
+        
         return DataTables::of($data)
-        ->addColumn('action', function($row){
-            $d = $row['id'];
-            $actionBtn = view('content.tasks.actions', compact('d'))->render();;
-            return $actionBtn;
-        })
+        ->addColumn('action', 'content.tasks.actions')
         ->rawColumns(['action'])
         ->make(true);
     }
