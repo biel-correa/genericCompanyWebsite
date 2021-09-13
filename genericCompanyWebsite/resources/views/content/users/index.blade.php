@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="">Data de criação inicial</label>
-                        {{ Form::date('min_created_at', Carbon\Carbon::now()->subYears(10)->format('Y-m-d'), ['placeholder' => 'Select a date', 'id' => 'min_created_at', 'onchange' => 'refreshTableUsers();', 'class' => 'form-control']) }}
+                        {{ Form::date('min_created_at', null, ['placeholder' => 'Select a date', 'id' => 'min_created_at', 'onchange' => 'refreshTableUsers();', 'class' => 'form-control']) }}
                     </div>
                     <div class="col-md-4"></div>
                 </div>

@@ -26,6 +26,10 @@ class AjaxController extends Controller
                         if ($value == null) {
                             $operator = '!=';
                         }
+                    case 'created_at':
+                        if ($value == null) {
+                            $operator = '!=';
+                        }
                     default:
                         $key = 'users.' . $key;
                 }
