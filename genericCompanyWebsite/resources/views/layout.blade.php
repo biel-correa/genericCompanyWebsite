@@ -42,6 +42,8 @@
   </div>
 
   @include('layouts.tabpanel')
+  
+  @yield('script')
 
   <script>
     $(document).ready(function () {

@@ -51,21 +51,6 @@
                         <td>Actions</td>
                     </tfoot>
                 </table>
-                <script>
-                    $(document).ready(function() {
-                        $('#table-assigned').DataTable( {
-                            "processing": true,
-                            "serverSide": true,
-                            "ajax": "{{route('ajax.users.taskassined', $data->id)}}",
-                            "columns": [
-                                {data: 'id', name: 'id'},
-                                {data: 'name', name: 'name'},
-                                {data: 'created_at', name: 'created_at'},
-                                {data: 'action', name: 'action', orderable: false, searchable: false}
-                            ]
-                        } );
-                    } );
-                </script>
             </div>
             <div role="tabpanel" class="tab-pane" id="tasks_created">
                 <h1>Tasks created</h1>
@@ -83,23 +68,38 @@
                         <td>Actions</td>
                     </tfoot>
                 </table>
-                <script>
-                    $(document).ready(function() {
-                        $('#table-requested').DataTable( {
-                            "processing": true,
-                            "serverSide": true,
-                            "ajax": "{{route('ajax.users.taskrequested', $data->id)}}",
-                            "columns": [
-                                {data: 'id', name: 'id'},
-                                {data: 'name', name: 'name'},
-                                {data: 'created_at', name: 'created_at'},
-                                {data: 'action', name: 'action', orderable: false, searchable: false}
-                            ]
-                        } );
-                    } );
-                </script>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#table-assigned').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{route('ajax.users.taskassined', $data->id)}}",
+            "columns": [
+                {data: 'id', name: 'id'},
+                {data: 'name', name: 'name'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        } );
+
+        $('#table-requested').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{route('ajax.users.taskrequested', $data->id)}}",
+            "columns": [
+                {data: 'id', name: 'id'},
+                {data: 'name', name: 'name'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        } );
+    } );
+</script>
 @endsection
