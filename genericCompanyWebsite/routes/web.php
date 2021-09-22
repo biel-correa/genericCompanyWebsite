@@ -1,5 +1,6 @@
 <?php
 
+use App\TelevisionPlan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,8 @@ Route::prefix('/tasks')->group(function() {
 
 Route::resource('roles', RoleController::class);
 
+Route::resource('tv_plans', PlanoController::class);
+
 Route::prefix('/ajax')->group(function() {
     Route::get('/users', 'AjaxController@listUsers')->name('ajax.users');
     Route::prefix('/user')->group(function () {
@@ -29,4 +32,5 @@ Route::prefix('/ajax')->group(function() {
     });
     Route::get('/tasks', 'AjaxController@listTasks')->name('ajax.tasks');
     Route::get('/roles', 'AjaxController@listRoles')->name('ajax.roles');
+    Route::get('/tv_plans', 'AjaxController@listTvPlans')->name('ajax.tv_plans');
 });

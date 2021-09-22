@@ -35,6 +35,17 @@
                 </span>
             </a>
         </li>
+        <li>
+            <a href="{{route('tv_plans.index')}}">
+                <span class="icon color7">
+                    <i class="fa fa-eye"></i>
+                </span>
+                Planos de TV
+                <span class="label label-default">
+                    {{ App\Planos::all()->count() }}
+                </span>
+            </a>
+        </li>
     </ul>
 
 </div>

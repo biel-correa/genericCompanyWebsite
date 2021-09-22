@@ -8,7 +8,7 @@ use App\Tasks;
 use App\Role;
 use DataTables;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\Contracts\DataTable;
+use GuzzleHttp\Client;
 
 class AjaxController extends Controller
 {
@@ -117,6 +117,22 @@ class AjaxController extends Controller
         ->addColumn('action', function($row){
             $d = $row['id'];
             $actionBtn = view('content.roles.actions', compact('d'))->render();;
+            return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+
+    public function listTvPlans(Request $request) {
+        $client = new Client;
+        $request = $client->get('http://api1.company.test/api/planos');
+        $response = json_decode($request->getBody());
+
+        return DataTables::of($response->data)
+        ->addColumn('action', function($row){
+            $id = $row->id;
+            $is_active = $row->is_active;
+            $actionBtn = view('content.tvPlans.actions', compact('id', 'is_active'))->render();
             return $actionBtn;
         })
         ->rawColumns(['action'])
