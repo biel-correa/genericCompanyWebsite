@@ -19,12 +19,12 @@ class TasksController extends Controller
     }
     
     public function show(int $id){
-        $data = Tasks::find($id);
+        $data = Tasks::findOrFail($id);
         return view('content.tasks.viewTask', compact('data'));
     }
 
     public function edit(int $id){
-        if (!$data = Tasks::find($id)) {
+        if (!$data = Tasks::findOrFail($id)) {
             return redirect()
                 ->route('tasks.index')
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível efetuar o cadastro.']);
@@ -35,7 +35,7 @@ class TasksController extends Controller
     }
 
     public function destroy(int $id){
-        Tasks::find($id)->delete($id);
+        Tasks::findOrFail($id)->delete($id);
         return redirect()->route('tasks.index');
     }
 
@@ -64,7 +64,7 @@ class TasksController extends Controller
     }
 
     public function update(Request $request, $id){
-        if (!$data = Tasks::find($id)) {
+        if (!$data = Tasks::findOrFail($id)) {
             return redirect()
                 ->route('tasks.index')
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);

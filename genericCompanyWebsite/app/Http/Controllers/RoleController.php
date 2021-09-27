@@ -19,12 +19,12 @@ class RoleController extends Controller
     }
     
     public function show(int $id){
-        $data = Role::find($id);
+        $data = Role::findOrFail($id);
         return view('content.roles.viewRole', compact('data'));
     }
 
     public function edit(int $id){
-        if (!$data = Role::find($id)) {
+        if (!$data = Role::findOrFail($id)) {
             return redirect()
                 ->route('roles.index')
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível efetuar o cadastro.']);
@@ -35,7 +35,7 @@ class RoleController extends Controller
     }
 
     public function destroy(int $id){
-        Role::find($id)->delete($id);
+        Role::findOrFail($id)->delete($id);
         return redirect()->route('roles.index');
     }
 
@@ -55,7 +55,7 @@ class RoleController extends Controller
     }
 
     public function update(Request $request, $id){
-        if (!$data = Role::find($id)) {
+        if (!$data = Role::findOrFail($id)) {
             return redirect()
                 ->route('roles.index')
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);

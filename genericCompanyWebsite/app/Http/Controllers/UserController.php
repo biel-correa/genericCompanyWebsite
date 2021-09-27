@@ -40,12 +40,12 @@ class UserController extends Controller
     }
 
     public function show(int $id){
-        $data = User::find($id);
+        $data = User::findOrFail($id);
         return view('content.users.viewUser', compact('data'));
     }
 
     public function destroy(int $id){
-        $data = User::find($id);
+        $data = User::findOrFail($id);
         if ($data->tasksCreated->count() && $data->tasksAssined->count()) {
             return redirect()
             ->route('users.index')
@@ -65,7 +65,7 @@ class UserController extends Controller
     }
 
     public function edit(int $id){
-        if ($data = User::find($id)) {
+        if ($data = User::findOrFail($id)) {
             $roles = Role::pluck('name', 'id');
             return view('content.users.editUser', compact('data', 'roles'));
         }
@@ -74,7 +74,7 @@ class UserController extends Controller
 
     public function update(Request $request, int $id){
         
-        if (!$data = User::find($id)) {
+        if (!$data = User::findOrFail($id)) {
             return redirect()
             ->route('users.index')
             ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível localizar o cadastro.']);
