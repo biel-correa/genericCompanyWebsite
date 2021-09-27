@@ -8,7 +8,6 @@ use App\Tasks;
 use App\Role;
 use Carbon\Carbon;
 use DataTables;
-use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 
 class AjaxController extends Controller
@@ -123,11 +122,7 @@ class AjaxController extends Controller
     }
 
     public function listRoles() {
-        $data = Role::latest()->limit(100)->get()->map(function($item) {
-            $newData = $item->only(['id', 'name', 'created_at']);
-            $newData['created_at'] = $newData['created_at']->format('d/m/Y');
-            return $newData;
-        });
+        $data = Role::latest()->limit(100)->get();
         return DataTables::of($data)
         ->addColumn('action', function($row){
             $d = $row['id'];
@@ -135,6 +130,12 @@ class AjaxController extends Controller
             return $actionBtn;
         })
         ->rawColumns(['action'])
+        ->editColumn('created_at', function($data) {
+            return with(new Carbon($data->created_at))->format('d/m/Y');
+        })
+        ->editColumn('updated_at', function($data) {
+            return with(new Carbon($data->updated_at))->format('d/m/Y');
+        })
         ->make(true);
     }
 
