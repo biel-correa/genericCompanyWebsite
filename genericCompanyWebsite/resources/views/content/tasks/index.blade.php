@@ -68,7 +68,7 @@
                 {data: 'id'},
                 {data: 'name'},
                 {data: 'assign_to'},
-                {data: 'formarted_created_at', name: 'created_at'},
+                {data: 'created_at'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         } );

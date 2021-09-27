@@ -106,13 +106,19 @@ class AjaxController extends Controller
         }
         
         $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'users.name as assign_to', DB::raw('DATE_FORMAT(tasks.created_at, "%d/%m/%Y %H:%i") as formarted_created_at'))
+        ->select('tasks.id', 'tasks.name', 'users.name as assign_to')
         ->where($whereFilter)
         ->limit(100);
         
         return DataTables::of($data)
         ->addColumn('action', 'content.tasks.actions')
         ->rawColumns(['action'])
+        ->editColumn('created_at', function($data) {
+            return with(new Carbon($data->created_at))->format('d/m/Y');
+        })
+        ->editColumn('updated_at', function($data) {
+            return with(new Carbon($data->updated_at))->format('d/m/Y');
+        })
         ->make(true);
     }
 
