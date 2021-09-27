@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Tasks;
 use App\Role;
+use Carbon\Carbon;
 use DataTables;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
@@ -38,13 +39,19 @@ class AjaxController extends Controller
             $whereFilter[] = [$key, $operator, $value];
         }
 
-        $data = User::select(['users.*', DB::raw('DATE_FORMAT(users.created_at, "%d/%m/%Y %H:%i") as formarted_created_at'), 'roles.name as role_name'])
+        $data = User::select(['users.*', 'roles.name as role_name'])
             ->leftJoin('roles', 'roles.id', '=', 'users.role_id')
             ->where($whereFilter)
             ->limit(100);
         
         $dataTable = DataTables::of($data)
             ->addColumn('action', 'content.users.actions')
+            ->editColumn('created_at', function($data) {
+                return with(new Carbon($data->created_at))->format('d/m/Y');
+            })
+            ->editColumn('updated_at', function($data) {
+                return with(new Carbon($data->updated_at))->format('d/m/Y');
+            })
             ->make(true);
 
         return $dataTable;

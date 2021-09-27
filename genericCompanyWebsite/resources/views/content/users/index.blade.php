@@ -106,7 +106,7 @@
                 {data: 'name'},
                 {data: 'email'},
                 {data: 'role_name', name: 'role.name'},
-                {data: 'formarted_created_at', name: 'created_at'},
+                {data: 'created_at'},
                 {data: 'action', searchable: false},
             ]
         })
