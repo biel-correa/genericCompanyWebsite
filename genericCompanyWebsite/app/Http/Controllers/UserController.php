@@ -56,14 +56,6 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function search(Request $request) {
-        if ($request->search == "") {
-            return redirect()->route('users.index');
-        }
-        $data = User::where('name', 'LIKE', '%' . $request->search . '%')->get();
-        return view('content.users', compact('data'));
-    }
-
     public function edit(int $id){
         if ($data = User::findOrFail($id)) {
             $roles = Role::pluck('name', 'id');

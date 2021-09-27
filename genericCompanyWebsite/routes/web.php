@@ -9,16 +9,7 @@ Route::get('/', function () {
 
 Route::resource('users', UserController::class);
 
-Route::prefix('users')->group(function() {
-    Route::post('/search', 'UserController@search')->name('users.search');
-    Route::post('/edit/updateUserPassword/{id}', 'UserController@updateUserPassword')->name('users.updateUserPassword');
-});
-
 Route::resource('tasks', TasksController::class);
-
-Route::prefix('/tasks')->group(function() {
-    Route::post('/search', 'TasksController@search')->name('tasks.search');
-});
 
 Route::resource('roles', RoleController::class);
 
