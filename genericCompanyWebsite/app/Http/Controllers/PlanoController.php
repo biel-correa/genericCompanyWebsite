@@ -83,6 +83,6 @@ class PlanoController extends Controller
         $apiRequest = $client->delete($this->apiUrl . 'planos/' . $id);
         $response = json_decode($apiRequest->getBody());
 
-        return redirect()->route('tv_plans.index');
+        return redirect()->route('tv_plans.index', compact('response'));
     }
 }
