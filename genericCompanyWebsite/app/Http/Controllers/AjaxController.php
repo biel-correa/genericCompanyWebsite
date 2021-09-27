@@ -68,6 +68,12 @@ class AjaxController extends Controller
             return $actionBtn;
         })
         ->rawColumns(['action'])
+        ->editColumn('created_at', function($data) {
+            return with(new Carbon($data->created_at))->format('d/m/Y');
+        })
+        ->editColumn('updated_at', function($data) {
+            return with(new Carbon($data->updated_at))->format('d/m/Y');
+        })
         ->make(true);
     }
 
@@ -83,6 +89,12 @@ class AjaxController extends Controller
             return $actionBtn;
         })
         ->rawColumns(['action'])
+        ->editColumn('created_at', function($data) {
+            return with(new Carbon($data->created_at))->format('d/m/Y');
+        })
+        ->editColumn('updated_at', function($data) {
+            return with(new Carbon($data->updated_at))->format('d/m/Y');
+        })
         ->make(true);
     }
 
