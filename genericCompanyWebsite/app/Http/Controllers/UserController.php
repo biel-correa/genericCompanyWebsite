@@ -92,7 +92,7 @@ class UserController extends Controller
                 ->with('message', ['type' => 'danger', 'msg' => 'Não foi possível editar o cadastro.']);
     }
 
-    public function makeRules(Request $request, $data = null){
+    public function makeRules($data = null){
         $messages = [
             'name.required' => 'Por favor informe o nome.',
             'name.min' => 'Nome inválido, mínimo de 3 caracteres',

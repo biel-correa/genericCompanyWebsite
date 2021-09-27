@@ -57,7 +57,7 @@ class AjaxController extends Controller
         return $dataTable;
     }
 
-    public function taskassined(Request $request, int $id) {
+    public function taskassined(int $id) {
         $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
         ->select('tasks.id', 'tasks.name', 'tasks.created_at')
         ->where('users.id', '=', $id)->limit(100)->get();
@@ -72,7 +72,7 @@ class AjaxController extends Controller
         ->make(true);
     }
 
-    public function taskrequested(Request $request, int $id) {
+    public function taskrequested(int $id) {
         $data = Tasks::join('users', 'tasks.requester_id', '=', 'users.id')
         ->select('tasks.id', 'tasks.name', 'tasks.created_at')
         ->where('users.id', '=', $id)->limit(100)->get();
@@ -122,7 +122,7 @@ class AjaxController extends Controller
         ->make(true);
     }
 
-    public function listRoles(Request $request) {
+    public function listRoles() {
         $data = Role::latest()->limit(100)->get()->map(function($item) {
             $newData = $item->only(['id', 'name', 'created_at']);
             $newData['created_at'] = $newData['created_at']->format('d/m/Y');
