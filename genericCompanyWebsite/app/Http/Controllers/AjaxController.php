@@ -52,7 +52,8 @@ class AjaxController extends Controller
 
     public function taskassined(Request $request, int $id) {
         $data = Tasks::join('users', 'tasks.user_assigned_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'tasks.created_at')->limit(100)->get();
+        ->select('tasks.id', 'tasks.name', 'tasks.created_at')
+        ->where('users.id', '=', $id)->limit(100)->get();
         
         return DataTables::of($data)
         ->addColumn('action', function($row){
@@ -66,7 +67,8 @@ class AjaxController extends Controller
 
     public function taskrequested(Request $request, int $id) {
         $data = Tasks::join('users', 'tasks.requester_id', '=', 'users.id')
-        ->select('tasks.id', 'tasks.name', 'tasks.created_at')->limit(100)->get();
+        ->select('tasks.id', 'tasks.name', 'tasks.created_at')
+        ->where('users.id', '=', $id)->limit(100)->get();
         
         return DataTables::of($data)
         ->addColumn('action', function($row){
