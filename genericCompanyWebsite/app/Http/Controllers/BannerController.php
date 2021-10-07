@@ -23,7 +23,14 @@ class BannerController extends Controller
     }
 
     public function show(Request $request, String $file) {
-        dd($request);
+        if (Storage::disk('banners')->exists($file)) {
+            $data = (object) array(
+                'file_name' => $file,
+                'file_path' => "img/banners/" . $file
+            );
+            return view('content.banners.show', compact('data'));
+        }
+        return redirect()->route('banners.index');
     }
 
     public function store(Request $request) {
