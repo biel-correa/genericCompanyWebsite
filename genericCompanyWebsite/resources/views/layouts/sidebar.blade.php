@@ -46,6 +46,17 @@
                 </span>
             </a>
         </li>
+        <li>
+            <a href="{{route('banners.index')}}">
+                <span class="icon color7">
+                    <i class="fa fa-image"></i>
+                </span>
+                Banners
+<!--                <span class="label label-default">
+                    {{ App\Planos::all()->count() }}
+                </span>-->
+            </a>
+        </li>
     </ul>
 
 </div>

@@ -15,6 +15,8 @@ Route::resource('roles', RoleController::class);
 
 Route::resource('tv_plans', PlanoController::class);
 
+Route::resource('banners', BannerController::class);
+
 Route::prefix('/ajax')->group(function() {
     Route::get('/users', 'AjaxController@listUsers')->name('ajax.users');
     Route::prefix('/user')->group(function () {
