@@ -14,7 +14,8 @@ class BannerController extends Controller
                 $data,
                 (object) array(
                     'full_path' => "img/banners/" . $value,
-                    'file_name' => $value
+                    'file_name' => $value,
+                    'id' => substr($value, 0, strrpos($value, "."))
                 )
             );
         }
@@ -44,15 +45,20 @@ class BannerController extends Controller
         return redirect()->route('banners.index');
     }
 
-    public function update(Request $request) {
-        dd($request);
+    public function edit(String $data) {
+        return view('content.banners.edit', compact('data'));
     }
 
-    public function destroy(Request $request) {
-        dd($request);
+    public function update(Request $request, String $file) {
+        $file_name = substr($file, 0, strrpos($file, "."));
+        $file_type = $request->banner->extension();
+        Storage::disk('banners')->delete($file);
+        Storage::disk('banners')->put($file_name . "." . $file_type, file_get_contents($request->banner->getRealPath()));
+        return redirect()->route('banners.show', $file_name . "." . $file_type);
     }
 
-    public function edit(Request $request) {
-        dd($request);
+    public function destroy(Request $request, String $file) {
+        Storage::disk('banners')->delete($file);
+        return redirect()->route('banners.index');
     }
 }
