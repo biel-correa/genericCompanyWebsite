@@ -1,5 +1,14 @@
 @extends('layout')
 @section('content')
+    <div class="page-header">
+        <h1 class="title">Banners</h1>
+        <ol class="breadcrumb">
+            <li class="active">Banners</li>
+        </ol>
+        <div class="right">
+            <a class="btn btn-success" href="{{ route('banners.create') }}"><i class="fa fa-user-plus"></i> ADD</a>
+        </div>
+    </div>
     @foreach($data as $file)
         <div class="panel panel-widget blog-post">
             <div class="panel-body">
