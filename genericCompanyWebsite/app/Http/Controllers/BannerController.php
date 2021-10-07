@@ -33,12 +33,15 @@ class BannerController extends Controller
         return redirect()->route('banners.index');
     }
 
-    public function store(Request $request) {
-        dd($request);
+    public function create() {
+        return view('content.banners.create');
     }
 
-    public function create(Request $request) {
-        dd($request);
+    public function store(Request $request) {
+        $files = Storage::disk('banners')->files();
+        $file_type = $request->banner->extension();
+        Storage::disk('banners')->put(count($files) + 1 . "." . $file_type, file_get_contents($request->banner->getRealPath()));
+        return redirect()->route('banners.index');
     }
 
     public function update(Request $request) {
