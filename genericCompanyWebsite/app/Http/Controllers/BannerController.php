@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,23 +13,23 @@ class BannerController extends Controller
         foreach(Storage::disk('banners')->files() as $key=>$value) {
             array_push(
                 $data,
-                (object) array(
-                    'full_path' => "img/banners/" . $value,
+                new Banner([
+                    'file_path' => "img/banners/" . $value,
                     'file_name' => $value,
                     'id' => substr($value, 0, strrpos($value, "."))
-                )
+                ])
             );
         }
-
         return view('content.banners.index', compact('data'));
     }
 
     public function show(Request $request, String $file) {
         if (Storage::disk('banners')->exists($file)) {
-            $data = (object) array(
+            $data = new Banner([
                 'file_name' => $file,
-                'file_path' => "img/banners/" . $file
-            );
+                'file_path' => "img/banners/" . $file,
+                'id' => substr($file, 0, strrpos($file, "."))
+            ]);
             return view('content.banners.show', compact('data'));
         }
         return redirect()->route('banners.index');
